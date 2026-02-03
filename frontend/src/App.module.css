@@ -1,0 +1,17 @@
+.root {
+  padding: 2rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.message {
+  color: var(--message-color, #0a0);
+}
+
+.error {
+  color: var(--error-color, #c00);
+}
