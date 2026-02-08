@@ -5,11 +5,20 @@
 }
 
 .search-bar-container {
-  padding-top: 20vh;
+  padding-top: 10vh;
   width: 40%;
   margin: auto;
   display:flex;
   flex-direction: column;
   align-items: center;
   min-width: 200px;
+}
+
+.title {
+  padding-top: 10vh;
+  margin: auto;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Helvetica, sans-serif;
 }

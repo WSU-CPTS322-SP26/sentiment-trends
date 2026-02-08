@@ -9,7 +9,9 @@ function App() {
 const [results, setResults] = useState([]);
 
   return (
+
     <div className="App">
+      <h1 className="title">Sentiment Trends</h1>
       <div className="search-bar-container">
         <SearchBar setResults={setResults}/>
         <SearchResultsList results = {results}/>
