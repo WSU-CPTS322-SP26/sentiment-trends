@@ -12,6 +12,7 @@ const [results, setResults] = useState([]);
 
     <div className="App">
       <h1 className="title">Sentiment Trends</h1>
+      <div className="subtitle">Discover the pulse of public opinion with our sentiment analysis tool.</div>
       <div className="search-bar-container">
         <SearchBar setResults={setResults}/>
         <SearchResultsList results = {results}/>

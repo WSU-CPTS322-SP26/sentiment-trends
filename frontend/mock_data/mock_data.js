@@ -16,5 +16,8 @@ export const mockSearch = [
   { id: 15, term: "Steph Curry"},
   { id: 16, term: "S&P 500"},
   { id: 17, term: "Tesla"},
-  { id: 18, term: "iPhone 18 Pro"}
+  { id: 18, term: "iPhone 18 Pro"},
+  { id: 19, term: "Quantum Computing"},
+  { id: 20, term: "Lebron James"},
+  { id: 21, term: "Venmo"},
 ];

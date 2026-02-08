@@ -5,7 +5,7 @@
 }
 
 .search-bar-container {
-  padding-top: 10vh;
+  padding-top: 5vh;
   width: 40%;
   margin: auto;
   display:flex;
@@ -21,4 +21,12 @@
   flex-direction: column;
   align-items: center;
   font-family: Helvetica, sans-serif;
+}
+
+.subtitle {
+  padding-top: 1vh;
+  font-size: 1.25rem;
+  color: #555;
+  display:flex;
+  justify-content: center;
 }
