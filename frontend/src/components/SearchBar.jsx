@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaSearch } from "react-icons/fa";
 import { mockSearch } from '../../mock_data/mock_data';
-import "./SearchBar.css";
+import styles from "../styles/components/SearchBar.module.css";
 
 export const SearchBar = ({ setResults }) => {
   const [input, setInput] = useState("");
@@ -24,11 +24,13 @@ export const SearchBar = ({ setResults }) => {
   };
 
     return (
-      <div className="input-wrapper">
-        <FaSearch id="search-icon" />
-        <input placeholder="Type to search..." 
-        value={input}
-        onChange={(e) => handleChange(e.target.value)}
+      <div className={styles.inputWrapper}>
+        <FaSearch className={styles.searchIcon} />
+        <input 
+          className={styles.input}
+          placeholder="Type to search..." 
+          value={input}
+          onChange={(e) => handleChange(e.target.value)}
         />
       </div>
     );
