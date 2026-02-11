@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { SearchBar } from "../components/SearchBar";
 import { SearchResultsList } from "../components/SearchResultsList";
+import Header from "../components/Header";
 import styles from "../styles/pages/HomePage.module.css";
+import { appConfig } from "../constants";
 
 
 const HomePage = () => {
@@ -11,12 +13,7 @@ const [results, setResults] = useState([]);
   return (
 
     <div className={styles.HomePage}>
-      <h1 className={styles.title}>Sentiment Trends</h1>
-      <div className={styles.subtitle}>Discover the pulse of public opinion with our sentiment analysis tool.</div>
-      <div className={styles.searchBarContainer}>
-        <SearchBar setResults={setResults}/>
-        <SearchResultsList results = {results}/>
-      </div>
+      <Header title={appConfig.name} onSearch={setResults} results={results}/>
     </div>
     
   );

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaSearch } from "react-icons/fa";
+import { FiSearch } from "react-icons/fi";
 import { mockSearch } from '../../mock_data/mock_data';
 import styles from "../styles/components/SearchBar.module.css";
 
@@ -25,7 +25,7 @@ export const SearchBar = ({ setResults }) => {
 
     return (
       <div className={styles.inputWrapper}>
-        <FaSearch className={styles.searchIcon} />
+        <FiSearch className={styles.searchIcon} />
         <input 
           className={styles.input}
           placeholder="Type to search..." 
