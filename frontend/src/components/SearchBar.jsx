@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FiSearch } from "react-icons/fi";
-import { mockSearch } from '../../mock_data/mock_data';
+import { mockSearch } from '../../mocks/data/mock_data';
 import styles from "../styles/components/SearchBar.module.css";
 
 export const SearchBar = ({ setResults }) => {

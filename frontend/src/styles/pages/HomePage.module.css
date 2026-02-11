@@ -21,3 +21,11 @@
   justify-content: center;
   font-family: Helvetica, sans-serif;
 }
+
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
