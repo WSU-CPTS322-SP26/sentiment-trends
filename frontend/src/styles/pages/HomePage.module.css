@@ -1,0 +1,33 @@
+.HomePage {
+  background-color: #eee;
+  height: 100vh;
+  width: 100vw;
+}
+
+.title {
+  padding-top: 10vh;
+  margin: auto;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Helvetica, sans-serif;
+}
+
+.subtitle {
+  padding-top: 1vh;
+  font-size: 1.25rem;
+  color: #555;
+  display:flex;
+  justify-content: center;
+  font-family: Helvetica, sans-serif;
+}
+
+.searchBarContainer {
+  padding-top: 5vh;
+  width: 40%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 200px;
+}
