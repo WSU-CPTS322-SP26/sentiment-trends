@@ -1,11 +1,12 @@
 .header {
     background-color: #ffffff;
     padding: 15px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--color-secondary);
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    color: var(--color-primary);
 }
 
 .headerRow {

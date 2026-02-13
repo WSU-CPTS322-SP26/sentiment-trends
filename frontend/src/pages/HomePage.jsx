@@ -7,7 +7,6 @@ import styles from "../styles/pages/HomePage.module.css";
 import { appConfig } from "../constants";
 import { mockCards } from "../../mocks/data/mock_data";
 
-
 const HomePage = () => {
 
 const [results, setResults] = useState([]);

@@ -10,7 +10,7 @@ const Card = ({title, image, sentiment}) => {
                 </img>
                 <h2 className={styles.cardTitle}>{title}</h2>
             </div>
-            <p className={styles.cardText}>{sentiment}</p>
+            <p className={styles.cardDescription}>{sentiment}</p>
         </div>
     );
 }

@@ -1,7 +1,7 @@
 .card{
     border: 1px solid hsl(0, 0%, 80%);
     border-radius: 12px;
-    box-shadow: 5px 5px 5px hsl(0, 0%, 0%, 0.1);
+    box-shadow: var(--shadow-lg);
     padding: 20px;
     margin: 20px;
     text-align: left;
@@ -19,7 +19,6 @@
 .cardImage{
     width: clamp(40px, 10%, 64px);
     height: clamp(40px, 10%, 64px);
-    
     border-radius: 10%;
     margin-bottom: 10px;
 }
@@ -29,11 +28,12 @@
     font-weight: 500;
     margin-bottom: 10px;
     margin-left: 10px;
+    color: var(--color-primary);
 }
 
 .cardDescription{
     font-size: 1rem;
-    color: #000000;
+    color: var(--color-primary);
 }
 
 .cardsContainer {
