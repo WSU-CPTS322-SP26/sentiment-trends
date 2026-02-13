@@ -49,7 +49,7 @@ export const mockCards = [
     id: 3,
     title: "Taylor Swift",
     image: taylor_swift,
-    sentiment: "📈 positive sentiment 📈"
+    sentiment: "📈 Positive sentiment 📈"
   },
   {
     id: 4,

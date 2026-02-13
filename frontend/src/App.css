@@ -1,32 +1,9 @@
 .App {
-  background-color: #ffffff;
-  height: 100vh;
-  width: 100vw;
-  font-family: Helvetica, sans-serif;
-}
-
-.searchBarContainer {
-  padding-top: 5vh;
-  width: 40%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 200px;
-}
-
-.title {
-  padding-top: 10vh;
-  margin: auto;
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.subtitle {
-  padding-top: 1vh;
-  font-size: 1.25rem;
-  color: #555;
-  display:flex;
-  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
