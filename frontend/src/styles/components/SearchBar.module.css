@@ -1,9 +1,9 @@
 .inputWrapper {
-    background-color: #eeeeeebb;
+    background-color: var(--color-surface);
     width: 100%;
-    border-radius: 7px;
+    border-radius: var(--border-radius-lg);
     height: 2.5rem;
-    padding: 0 15px;
+    padding: 0 var(--spacing-md);
     display: flex;
     align-items: center;
 }
@@ -12,9 +12,10 @@
     background-color: transparent;
     border: none;
     height: 100%;
-    font-size: 1rem;
+    font-size: var(--font-size-md);
     width: 100%;
-    margin-left: 5px;
+    margin-left: var(--spacing-xs);
+    color: var(--color-text-primary)
 }
 
 .input:focus {
@@ -22,6 +23,6 @@
 }
 
 .searchIcon {
-    color: rgba(0, 0, 0, 0.500);
+    color: var(--color-text-muted);
     flex-shrink: 0;
 }

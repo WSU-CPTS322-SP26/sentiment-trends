@@ -1,9 +1,11 @@
 :root {
 
-  --color-primary: #000000;
-  --color-secondary: #5e6a71;
+  /* Primary App Color*/
+  /* Use for: primary buttons, active states,   */
+  /* links, focus rings, toggles/selected items */
+  --color-primary: #5b8cff;
 
-  /* Dark Mode Colors */
+  /* Main Colors */
   --color-white: #ffffff;
   --color-black: #000000;
   --color-gray: #5e6a71;
@@ -14,31 +16,27 @@
   --color-error: #dc3545;
   --color-info: #17a2b8;
 
-  /* Dark Mode Backgrounds */
+  /* Backgrounds */
   --color-background: #ffffff;
-  --color-background-secondary: #242424;
-  --color-background-tertiary: #2d2d2d;
-  --color-surface: #242424;
-  --color-surface-light: #2d2d2d;
-  --color-surface-dark: #1a1a1a;
+  --color-surface: #f5f5f5;
 
-  /* Dark Mode Text */
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #e0e0e0;
+  /* Text Colors */
+  --color-text-primary: #000000;
+  --color-text-secondary: #5e6a71;
   --color-text-light: #ffffff;
   --color-text-muted: #a7a8aa;
 
   /* Spacing */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
+  --spacing-xs: 6px;
+  --spacing-sm: 10px;
+  --spacing-md: 20px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
   --spacing-xxl: 48px;
   --spacing-xxxl: 64px;
   --spacing-header-padding: 20px;
   --spacing-section-padding: 40px;
-  --spacing-card-padding: 16px;
+  --spacing-card-padding: 20px;
   --spacing-button-padding: 12px 24px;
 
   /* Border radius */
@@ -51,7 +49,7 @@
   --font-size-xs: 12px;
   --font-size-sm: 14px;
   --font-size-md: 16px;
-  --font-size-lg: 18px;
+  --font-size-lg: 20px;
   --font-size-xl: 24px;
   --font-size-xxl: 32px;
   --font-size-xxxl: 48px;
@@ -65,6 +63,7 @@
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
+  --font-weight-heavy: 600;
   --font-weight-bold: 700;
 
   /* Shadows */
@@ -106,22 +105,9 @@
 }
 
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
-  line-height: var(--line-height-normal);
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-  background-color: var(--color-light-gray);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--border-radius-sm);
-  font-size: var(--font-size-sm);
 }
