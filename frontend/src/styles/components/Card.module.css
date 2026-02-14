@@ -1,0 +1,43 @@
+.card{
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    padding: 20px;
+    margin: 20px;
+    text-align: left;
+    width: 30%;
+    max-width: 350px;
+    display: table-column;
+    gap: 16px;
+    align-items: center;
+}
+
+.cardHeader {
+    display: flex;
+}
+
+.cardImage{
+    width: clamp(40px, 10%, 64px);
+    height: clamp(40px, 10%, 64px);
+    border-radius: 10%;
+    margin-bottom: 10px;
+}
+
+.cardTitle{
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    color: var(--color-primary);
+}
+
+.cardDescription{
+    font-size: 1rem;
+    color: var(--color-primary);
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}

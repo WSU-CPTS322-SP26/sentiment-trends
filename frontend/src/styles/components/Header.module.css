@@ -1,0 +1,32 @@
+.header {
+    background-color: #ffffff;
+    padding: 15px;
+    border-bottom: 1px solid var(--color-secondary);
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: var(--color-primary);
+}
+
+.headerRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.headerRow h2 {
+    margin: 0;
+    font-weight:600;
+    white-space: nowrap;
+}
+
+.searchBarContainer {
+  width: 80%;
+  max-width:  600px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 200px;
+}
