@@ -1,2 +1,4 @@
 flask
 flask-cors
+atproto
+python-dotenv
