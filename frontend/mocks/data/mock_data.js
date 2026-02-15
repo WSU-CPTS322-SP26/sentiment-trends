@@ -86,5 +86,59 @@ export const mockCards = [
     title: "Amazon",
     image: amazon,
     sentiment: "📉 Negative sentiment 📉"
+  },
+    {
+    id: 10,
+    title: "Bitcoin",
+    image: bitcoin,
+    sentiment: "📈 Positive sentiment 📈"
+  },
+  {
+    id: 11,
+    title: "OpenAI",
+    image: openai,
+    sentiment: "📉 Negative sentiment 📉"
+  },
+  {
+    id: 12,
+    title: "Taylor Swift",
+    image: taylor_swift,
+    sentiment: "📈 Positive sentiment 📈"
+  },
+  {
+    id: 13,
+    title: "Super Bowl LX",
+    image: super_bowl,
+    sentiment: "📈 Positive sentiment 📈"
+  },
+  {
+    id: 14,
+    title: "Apple",
+    image: apple,
+    sentiment: "📉 Neutral sentiment 📉"
+  },
+  {
+    id: 15,
+    title: "Tesla",
+    image: tesla,
+    sentiment: "📉 Negative sentiment 📉"
+  },
+  {
+    id: 16,
+    title: "S&P 500",
+    image: sp500,
+    sentiment: "📈 Positive sentiment 📈"
+  },
+  {
+    id: 17,
+    title: "Billie Eilish",
+    image: billie_eilish,
+    sentiment: "📈 Positive sentiment 📈"
+  },
+  {
+    id: 18,
+    title: "Amazon",
+    image: amazon,
+    sentiment: "📉 Negative sentiment 📉"
   }
 ]

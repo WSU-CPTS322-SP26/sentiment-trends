@@ -4,6 +4,7 @@
   /* Use for: primary buttons, active states,   */
   /* links, focus rings, toggles/selected items */
   --color-primary: #5b8cff;
+  --color-secondary: #e5e5e5;
 
   /* Main Colors */
   --color-white: #ffffff;
@@ -22,7 +23,7 @@
 
   /* Text Colors */
   --color-text-primary: #000000;
-  --color-text-secondary: #5e6a71;
+  --color-text-secondary: #7e7e7e;
   --color-text-light: #ffffff;
   --color-text-muted: #a7a8aa;
 
@@ -47,10 +48,10 @@
 
   /* Font sizes */
   --font-size-xs: 12px;
-  --font-size-sm: 14px;
+  --font-size-sm: 15px;
   --font-size-md: 16px;
   --font-size-lg: 20px;
-  --font-size-xl: 24px;
+  --font-size-xl: 23px;
   --font-size-xxl: 32px;
   --font-size-xxxl: 48px;
 

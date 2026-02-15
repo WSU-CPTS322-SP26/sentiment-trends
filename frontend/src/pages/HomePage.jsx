@@ -14,12 +14,11 @@ const [results, setResults] = useState([]);
   return (
 
     <div className={styles.HomePage}>
-
       <Header title={appConfig.name} 
         onSearch={setResults} 
         results={results}
       />
-
+      
       <div className={styles.pageContainer}>
         <div className={styles.cardsContainer}>
           {mockCards.map((card) => 

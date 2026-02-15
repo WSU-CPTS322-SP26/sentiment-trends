@@ -1,33 +1,33 @@
 .header {
+    position: sticky;
+    top: 0;  
     background-color: var(--color-background);
-    padding: var(--spacing-header-padding);
-    border-bottom: 1px solid var(--color-light-gray);
-    margin-bottom: var(--spacing-sm);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
+    padding: 0 var(--spacing-xs) var(--spacing-lg) 0 var(--spacing-lg);
+    border-bottom: 1px solid var(--color-secondary);
+    margin-bottom: var(--spacing-lg);
     color: var(--color-text-primary);
 }
 
-.headerRow {
+.headerContainer {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    gap: var(--spacing-lg);  
+    justify-content: space-between;
+    gap: var(--spacing-lg);
 }
 
-.headerRow h2 {
-    margin: 0;
-    font-weight: var(--font-weight-heavy);
-    white-space: nowrap;
-    font-size: var(--font-size-xl);
+.headerTitleContainer {
+  flex: auto;
 }
 
-.searchBarContainer {
-    width: 80%;
-    max-width:  600px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    min-width: 200px;
+.headerTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-heavy);
+}
+
+.headerSearch {
+    position: relative;
+    flex: auto;
+    max-width: 600px;
 }
