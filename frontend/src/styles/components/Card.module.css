@@ -3,13 +3,12 @@
   border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-lg);
   padding: var(--spacing-card-padding);
-  margin: var(--spacing-lg);
   text-align: left;
-  width: 30%;
-  max-width: 350px;
+  width: 100%;
+  max-width: none;
+  min-height: 180px;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
 }
 
 
@@ -22,13 +21,11 @@
     width: clamp(40px, 10%, 64px);
     height: clamp(40px, 10%, 64px);
     border-radius: 10%;
-    margin-bottom: var(--spacing-sm);
 }
 
 .cardTitle{
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
-  margin-bottom: var(--spacing-sm);
   margin-left: var(--spacing-sm);
   color: var(--color-text-primary);
 }
@@ -36,10 +33,4 @@
 .cardDescription{
     font-size: var(--font-size-md);
     color: var(--color-text-primary);
-}
-
-.cardsContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: var(--spacing-md);
 }

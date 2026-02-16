@@ -6,8 +6,12 @@
 }
 
 .cardsContainer {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: var(--spacing-sm);
+  max-width: 1300px; 
+  margin: 0 auto;
+  justify-items: center;
   justify-content: center;
 }
 

@@ -28,8 +28,8 @@
   --color-text-muted: #a7a8aa;
 
   /* Spacing */
-  --spacing-xs: 6px;
-  --spacing-sm: 10px;
+  --spacing-xs: 4px;
+  --spacing-sm: 12px;
   --spacing-md: 20px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
@@ -48,7 +48,7 @@
 
   /* Font sizes */
   --font-size-xs: 12px;
-  --font-size-sm: 15px;
+  --font-size-sm: 14.5px;
   --font-size-md: 16px;
   --font-size-lg: 20px;
   --font-size-xl: 23px;
