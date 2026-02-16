@@ -142,3 +142,95 @@ export const mockCards = [
     sentiment: "📉 Negative sentiment 📉"
   }
 ]
+
+export const mockCategories = [
+  { id: 0,
+    label: "All",
+    href: "/"
+  },
+  {
+    id: 1,
+    label: "Technology",
+    href: "/?cat=tech"
+  },
+  {
+    id: 2,
+    label: "Sports",
+    href: "/?cat=sports"
+  },
+  {
+    id: 3,
+    label: "Politics",
+    href: "/?cat=politics"
+  },
+  {
+    id: 4,
+    label: "Entertainment",
+    href: "/?cat=entertainment"
+  },
+  {
+    id: 5,
+    label: "Finance",
+    href: "/?cat=finance"
+  },
+  {
+    id: 6,
+    label: "Health",
+    href: "/?cat=health"
+  },
+  {
+    id: 7,
+    label: "Science",
+    href: "/?cat=science"
+  },
+  {
+    id: 8,
+    label: "Elections",
+    href: "/?cat=elections"
+  },
+  {
+    id: 9,
+    label: "Social Media",
+    href: "/?cat=socialmedia"
+  },
+  {
+    id: 10,
+    label: "Gaming",
+    href: "/?cat=gaming"
+  },
+  {
+    id: 11,
+    label: "Music",
+    href: "/?cat=music"
+  },
+  {
+    id: 12,
+    label: "Movies",
+    href: "/?cat=movies"
+  },
+  {
+    id: 13,
+    label: "TV Shows",
+    href: "/?cat=tvshows"
+  },
+  {
+    id: 14,
+    label: "Business",
+    href: "/?cat=business"
+  },
+  {
+    id: 15,
+    label: "Travel",
+    href: "/?cat=travel"
+  },
+  {
+    id: 16,
+    label: "Food",
+    href: "/?cat=food"
+  },
+  {
+    id: 17,
+    label: "Fashion",
+    href: "/?cat=fashion"
+  },
+]

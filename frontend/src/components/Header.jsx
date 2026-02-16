@@ -2,8 +2,9 @@ import React from "react";
 import styles from "../styles/components/Header.module.css";
 import { SearchBar } from "../components/SearchBar";
 import { SearchResultsList } from "../components/SearchResultsList";
+import Categories from "../components/Categories"
 
-const Header = ({ title, onSearch, results }) => {
+const Header = ({ title, onSearch, results, categories }) => {
     return (
 
         <div className={styles.header}>
@@ -16,6 +17,7 @@ const Header = ({ title, onSearch, results }) => {
                     {results?.length > 0 && <SearchResultsList results={results}/>}
                 </div>
             </div>
+            <Categories categories={categories} />
         </div>
     );
 }
