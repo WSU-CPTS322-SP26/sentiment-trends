@@ -1,43 +1,45 @@
-.card{
-    border: 1px solid hsl(0, 0%, 80%);
-    border-radius: 12px;
-    box-shadow: var(--shadow-lg);
-    padding: 20px;
-    margin: 20px;
-    text-align: left;
-    width: 30%;
-    max-width: 350px;
-    display: table-column;
-    gap: 16px;
-    align-items: center;
+.card {
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-card-padding);
+  margin: var(--spacing-lg);
+  text-align: left;
+  width: 30%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
 }
+
 
 .cardHeader {
     display: flex;
+    align-items: center;
 }
 
 .cardImage{
     width: clamp(40px, 10%, 64px);
     height: clamp(40px, 10%, 64px);
     border-radius: 10%;
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-sm);
 }
 
 .cardTitle{
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    color: var(--color-primary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-sm);
+  margin-left: var(--spacing-sm);
+  color: var(--color-text-primary);
 }
 
 .cardDescription{
-    font-size: 1rem;
-    color: var(--color-primary);
+    font-size: var(--font-size-md);
+    color: var(--color-text-primary);
 }
 
 .cardsContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1rem;
+  gap: var(--spacing-md);
 }

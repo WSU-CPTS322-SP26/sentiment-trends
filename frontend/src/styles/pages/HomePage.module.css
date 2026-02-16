@@ -5,24 +5,6 @@
   background-color: var(--color-background);
 }
 
-.title {
-  padding-top: 10vh;
-  margin: auto;
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: Helvetica, sans-serif;
-}
-
-.subtitle {
-  padding-top: 1vh;
-  font-size: 1.25rem;
-  color: #555;
-  display:flex;
-  justify-content: center;
-  font-family: Helvetica, sans-serif;
-}
-
 .cardsContainer {
   display: flex;
   flex-wrap: wrap;
@@ -32,5 +14,5 @@
 .pageContainer {
   max-width: 1800px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: var(--spacing-lg);
 }
