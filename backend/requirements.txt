@@ -3,5 +3,3 @@ flask-cors
 atproto
 python-dotenv
 vaderSentiment
-nltk
-vader_lexicon
