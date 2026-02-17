@@ -3,3 +3,4 @@ flask-cors
 atproto
 python-dotenv
 vaderSentiment
+Mastodon.py

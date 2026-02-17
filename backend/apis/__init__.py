@@ -1,3 +1,3 @@
-from apis import bluesky
+from apis import bluesky, mastodon
 
-__all__ = ["bluesky"]
+__all__ = ["bluesky", "mastodon"]
