@@ -26,7 +26,6 @@ def _to_dict(obj) -> dict:
         return obj
     if hasattr(obj, "model_dump"):
         return obj.model_dump()
-        return obj.model_dump()
     if hasattr(obj, "dict"):
         return obj.dict()
     return dict(obj)
