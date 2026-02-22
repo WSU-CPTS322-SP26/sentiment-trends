@@ -13,6 +13,8 @@
 
 
 .cardHeader {
+    text-decoration: none;
+    color: inherit;
     display: flex;
     align-items: center;
 }
@@ -40,4 +42,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.cardHeader:hover {
+  color: var(--color-text-primary);
+  text-decoration: underline;
 }

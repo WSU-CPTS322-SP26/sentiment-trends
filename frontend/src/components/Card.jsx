@@ -1,16 +1,17 @@
 import styles from "../styles/components/Card.module.css";
 import Bar from "./Bar";
+import { Link } from "react-router-dom";
 
 const Card = ({card}) => {
     return (
         <div className={styles.card}>
-            <div className={styles.cardHeader}>
+            <Link to={`/card/${card.id}`} className={styles.cardHeader}>
                 <img className={styles.cardImage}
                 src={card.image}
                 alt={card.title}>
                 </img>
                 <h2 className={styles.cardTitle}>{card.title}</h2>
-            </div>
+            </Link>
             <div className={styles.cardBody}>
                 <p>Compound Sentiment: {card.compound_sentiment}</p>
                 <Bar negative={card.negative_sentiment} 
