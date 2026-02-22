@@ -6,6 +6,11 @@
   --color-primary: #5b8cff;
   --color-secondary: #e5e5e5;
 
+  /* Bar Colors */
+  --color-bar-negative: #dc3545;
+  --color-bar-neutral: #bfbfbf;
+  --color-bar-positive: #28a745;
+
   /* Main Colors */
   --color-white: #ffffff;
   --color-black: #000000;

@@ -1,0 +1,12 @@
+.barContainer
+{
+    width: 100%;
+    height: 25px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+}
+
+.barSegment {
+    height: 100%;
+}

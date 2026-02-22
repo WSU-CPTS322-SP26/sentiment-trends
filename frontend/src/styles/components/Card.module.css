@@ -34,3 +34,10 @@
     font-size: var(--font-size-md);
     color: var(--color-text-primary);
 }
+
+.cardBody {
+    margin-top: var(--spacing-xs);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

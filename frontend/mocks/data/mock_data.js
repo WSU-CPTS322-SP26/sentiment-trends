@@ -37,109 +37,163 @@ export const mockCards = [
     id: 1,
     title: "Bitcoin",
     image: bitcoin,
-    sentiment: "📈 Positive sentiment 📈"
+    negative_sentiment: 0.4,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.3,
+    compound_sentiment: 0.0
   },
   {
     id: 2,
     title: "OpenAI",
     image: openai,
-    sentiment: "📉 Negative sentiment 📉"
+    negative_sentiment: 0.4,
+    neutral_sentiment: 0.4,
+    positive_sentiment: 0.2,
+    compound_sentiment: -0.2
   },
   {
     id: 3,
     title: "Taylor Swift",
     image: taylor_swift,
-    sentiment: "📈 Positive sentiment 📈"
+    negative_sentiment: 0.2,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.5,
+    compound_sentiment: 0.3
   },
   {
     id: 4,
     title: "Super Bowl LX",
     image: super_bowl,
-    sentiment: "📈 Positive sentiment 📈"
+    negative_sentiment: 0.1,
+    neutral_sentiment: 0.2,
+    positive_sentiment: 0.7,
+    compound_sentiment: 0.5
   },
   {
     id: 5,
     title: "Apple",
     image: apple,
-    sentiment: "📉 Neutral sentiment 📉"
+    negative_sentiment: 0.3,
+    neutral_sentiment: 0.4,
+    positive_sentiment: 0.3,
+    compound_sentiment: 0.0
   },
   {
     id: 6,
     title: "Tesla",
     image: tesla,
-    sentiment: "📉 Negative sentiment 📉"
+    negative_sentiment: 0.5,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.2,
+    compound_sentiment: -0.3
   },
   {
     id: 7,
     title: "S&P 500",
     image: sp500,
-    sentiment: "📈 Positive sentiment 📈"
+    negative_sentiment: 0.2,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.5,
+    compound_sentiment: 0.3
   },
   {
     id: 8,
     title: "Billie Eilish",
     image: billie_eilish,
-    sentiment: "📈 Positive sentiment 📈"
+    negative_sentiment: 0.1,
+    neutral_sentiment: 0.2,
+    positive_sentiment: 0.7,
+    compound_sentiment: 0.5
   },
   {
     id: 9,
     title: "Amazon",
     image: amazon,
-    sentiment: "📉 Negative sentiment 📉"
+    negative_sentiment: 0.4,
+    neutral_sentiment: 0.4,
+    positive_sentiment: 0.2,
+    compound_sentiment: -0.2
   },
-    {
+  {
     id: 10,
     title: "Bitcoin",
     image: bitcoin,
-    sentiment: "📈 Positive sentiment 📈"
+    negative_sentiment: 0.4,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.3,
+    compound_sentiment: 0.0
   },
   {
     id: 11,
     title: "OpenAI",
     image: openai,
-    sentiment: "📉 Negative sentiment 📉"
+    negative_sentiment: 0.4,
+    neutral_sentiment: 0.4,
+    positive_sentiment: 0.2,
+    compound_sentiment: -0.2
   },
   {
     id: 12,
     title: "Taylor Swift",
     image: taylor_swift,
-    sentiment: "📈 Positive sentiment 📈"
+    negative_sentiment: 0.2,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.5,
+    compound_sentiment: 0.3
   },
   {
     id: 13,
     title: "Super Bowl LX",
     image: super_bowl,
-    sentiment: "📈 Positive sentiment 📈"
+    negative_sentiment: 0.1,
+    neutral_sentiment: 0.2,
+    positive_sentiment: 0.7,
+    compound_sentiment: 0.5
   },
   {
     id: 14,
     title: "Apple",
     image: apple,
-    sentiment: "📉 Neutral sentiment 📉"
+    negative_sentiment: 0.3,
+    neutral_sentiment: 0.4,
+    positive_sentiment: 0.3,
+    compound_sentiment: 0.0
   },
   {
     id: 15,
     title: "Tesla",
     image: tesla,
-    sentiment: "📉 Negative sentiment 📉"
+    negative_sentiment: 0.5,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.2,
+    compound_sentiment: -0.3
   },
   {
     id: 16,
     title: "S&P 500",
     image: sp500,
-    sentiment: "📈 Positive sentiment 📈"
+    negative_sentiment: 0.2,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.5,
+    compound_sentiment: 0.3
   },
   {
     id: 17,
     title: "Billie Eilish",
     image: billie_eilish,
-    sentiment: "📈 Positive sentiment 📈"
+    negative_sentiment: 0.1,
+    neutral_sentiment: 0.2,
+    positive_sentiment: 0.7,
+    compound_sentiment: 0.5
   },
   {
     id: 18,
     title: "Amazon",
     image: amazon,
-    sentiment: "📉 Negative sentiment 📉"
+    negative_sentiment: 0.4,
+    neutral_sentiment: 0.4,
+    positive_sentiment: 0.2,
+    compound_sentiment: -0.2
   }
 ]
 
