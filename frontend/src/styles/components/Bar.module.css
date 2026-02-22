@@ -8,5 +8,10 @@
 }
 
 .barSegment {
-    height: 100%;
+    color: var(--color-text-light);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

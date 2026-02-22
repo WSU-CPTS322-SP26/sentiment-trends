@@ -13,7 +13,7 @@ const Card = ({card}) => {
                 <h2 className={styles.cardTitle}>{card.title}</h2>
             </Link>
             <div className={styles.cardBody}>
-                <p>Compound Sentiment: {card.compound_sentiment}</p>
+                <p>Compound Sentiment: {card.compound_sentiment * 100}%</p>
                 <Bar negative={card.negative_sentiment} 
                     neutral={card.neutral_sentiment} 
                     positive={card.positive_sentiment} 
