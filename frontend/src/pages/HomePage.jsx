@@ -20,7 +20,7 @@ const [results, setResults] = useState([]);
       <div className={styles.pageContainer}>
         <div className={styles.cardsContainer}>
           {mockCards.map((card) => 
-          <Card key={card.id} {...card} />
+          <Card key={card.id} card={card} />
           )}
         </div>
       </div>

@@ -9,10 +9,13 @@
   min-height: 180px;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 
 .cardHeader {
+    text-decoration: none;
+    color: inherit;
     display: flex;
     align-items: center;
 }
@@ -33,4 +36,16 @@
 .cardDescription{
     font-size: var(--font-size-md);
     color: var(--color-text-primary);
+}
+
+.cardBody {
+    font-weight: var(--font-weight-medium);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cardHeader:hover {
+  color: var(--color-text-primary);
+  text-decoration: underline;
 }

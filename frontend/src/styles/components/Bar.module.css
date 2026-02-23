@@ -1,0 +1,17 @@
+.barContainer
+{
+    width: 100%;
+    height: 25px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+}
+
+.barSegment {
+    color: var(--color-text-light);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
