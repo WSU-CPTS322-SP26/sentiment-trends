@@ -6,7 +6,6 @@ import Categories from "../components/Categories"
 
 const Header = ({ title, onSearch, results, categories }) => {
     return (
-
         <div className={styles.header}>
             <div className={styles.headerContainer}>
                 <div className={styles.headerTitleContainer}>
