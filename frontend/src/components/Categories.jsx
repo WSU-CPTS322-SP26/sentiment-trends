@@ -1,5 +1,6 @@
 import {useState, useRef} from "react";
 import styles from "../styles/components/Categories.module.css";
+import { Link } from "react-router-dom";
 
 const Categories = ({ categories = []}) => {
     const [hasScrolled, setHasScrolled] = useState(false);
@@ -14,13 +15,13 @@ const Categories = ({ categories = []}) => {
         onScroll={handleScroll} >
             <div className={styles.categoryInner}>
             {categories.map((category) => (
-                <a
+                <Link
                     key={category.id}
-                    href={category.href}
+                    to={category.href}
                     className={styles.categoryItem}
                 >
                     {category.label}
-                </a>
+                </Link>
             ))}
             </div>
         </div>
