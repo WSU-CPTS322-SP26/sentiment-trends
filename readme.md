@@ -20,19 +20,16 @@ The frontend is a fast, responsive React application (Vite + CSS Modules) organi
 
 Make sure the following are installed before you begin:
 
-
 | Tool                                                              | Version | Notes                      |
 | ----------------------------------------------------------------- | ------- | -------------------------- |
 | [Git](https://git-scm.com/)                                       | any     | for cloning the repo       |
 | [Docker Desktop](https://www.docker.com/products/docker-desktop/) | 24+     | includes Docker Compose v2 |
-
 
 No local Python or Node runtime is required.
 
 ### Add-ons
 
 #### Backend (Python 3.12 / Flask)
-
 
 | Package          | Purpose                                                  |
 | ---------------- | -------------------------------------------------------- |
@@ -43,9 +40,7 @@ No local Python or Node runtime is required.
 | `python-dotenv`  | Loads credentials from `.env` into environment variables |
 | `vaderSentiment` | Sentiment analysis                                       |
 
-
 #### Frontend (Node 20 / React 18)
-
 
 | Package                | Purpose                                   |
 | ---------------------- | ----------------------------------------- |
@@ -54,7 +49,6 @@ No local Python or Node runtime is required.
 | `react-icons`          | Icon set (search icon in the header bar)  |
 | `vite`                 | Development server and production bundler |
 | `@vitejs/plugin-react` | Vite plugin for React fast-refresh        |
-
 
 ### Installation Steps
 
@@ -76,11 +70,11 @@ cp backend/.env.example backend/.env
 Open `backend/.env` and replace the placeholder values:
 
 ```
-# Bluesky — create an App Password at https://bsky.app/settings/app-passwords
+# Bluesky: create an App Password at https://bsky.app/settings/app-passwords
 BLUESKY_HANDLE=yourhandle.bsky.social
 BLUESKY_APP_PASSWORD=your-app-password
 
-# Mastodon — register an application at https://<your-instance>/settings/applications
+# Mastodon: register an application at https://<your-instance>/settings/applications
 MASTODON_INSTANCE_URL=https://mastodon.social
 MASTODON_CLIENT_KEY=your_client_key
 MASTODON_CLIENT_SECRET=your_client_secret
@@ -99,12 +93,10 @@ Docker will pull base images, install all Python and Node dependencies, and star
 
 #### 4. Open the app
 
-
 | Service              | URL                                            |
 | -------------------- | ---------------------------------------------- |
 | Frontend             | [http://localhost:5001](http://localhost:5001) |
 | Backend health check | [http://localhost:3001](http://localhost:3001) |
-
 
 Both containers mount their source directories as live volumes, so any edits you make locally are reflected immediately (Flask `--reload`, Vite HMR with filesystem polling).
 
@@ -138,7 +130,6 @@ Type in the search bar in the header to filter a list of available topics. Click
 
 The Flask backend exposes the following endpoints:
 
-
 | Method | Endpoint             | Query params                              | Description                          |
 | ------ | -------------------- | ----------------------------------------- | ------------------------------------ |
 | GET    | `/`                  |                                           | Health check                         |
@@ -147,19 +138,21 @@ The Flask backend exposes the following endpoints:
 | GET    | `/mastodon/timeline` | `limit`, `cursor`                         | Authenticated Mastodon home timeline |
 | GET    | `/mastodon/search`   | `topic`, `limit`, `cursor`, `sort`, `tag` | Search Mastodon posts by topic       |
 
-
 All endpoints return JSON. Authentication errors return `{"error": "..."}` with a `401` status.
 
 ---
 
 ## Known Issues
 
-1. **Frontend uses mock data**: `[HomePage.jsx](frontend/src/pages/HomePage.jsx)` renders cards from `[mocks/data/mock_data.js](frontend/mocks/data/mock_data.js)` and no live calls to the backend are made from the UI. `[src/services/api.js](frontend/src/services/api.js)` exists but is only wired to the health check endpoint, not to search or sentiment flows.
-2. **Backend doesn't analyze sentiment yet**: `[backend/services/vader.py](backend/services/vader.py)` is a standalone test script that prints a score to the console. It has not been called from any route or applied to fetched posts, so no sentiment data is generated at runtime.
+1. **Frontend uses mock data**: [HomePage.jsx](frontend/src/pages/HomePage.jsx) renders cards from [mocks/data/mock_data.js](frontend/mocks/data/mock_data.js) and no live calls to the backend are made from the UI. [src/services/api.js](frontend/src/services/api.js) exists but is only wired to the health check endpoint, not to search or sentiment flows.
+
+2. **Backend doesn't analyze sentiment yet**: [backend/services/vader.py](backend/services/vader.py) is a standalone test script that prints a score to the console. It has not been called from any route or applied to fetched posts, so no sentiment data is generated at runtime.
+
 3. **No database integration**: There is no Supabase database connected yet. Fetched posts and computed sentiment scores are not persisted anywhere; everything is stateless and in-memory.
+
 4. **Major social platforms are inaccessible**: Reddit's API and Twitter/X's API are effectively closed to free or hobbyist use (high cost, restrictive terms, or revoked access). The app currently targets Bluesky and Mastodon as open alternatives. A workaround strategy for broader platform coverage is still to be determined.
-5. **No card detail page**: `[Card.jsx](frontend/src/components/Card.jsx)` links to `/card/:id` but that route is not registered in `[App.jsx](frontend/src/App.jsx)`, so clicking a card leads to a blank page.
-6. **Search result click is a no-op**: Clicking a search result currently triggers a browser `alert()` with the term name instead of navigating or fetching live data.
+
+5. **No card detail page**: [Card.jsx](frontend/src/components/Card.jsx) links to `/card/:id` but that route is not registered in [App.jsx](frontend/src/App.jsx), so clicking a card leads to a blank page.
 
 ---
 
@@ -179,4 +172,4 @@ All endpoints return JSON. Authentication errors return `{"error": "..."}` with 
 
 ## License
 
-This project is licensed under the MIT License. See `[LICENSE](LICENSE)` for the full text.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for the full text.
