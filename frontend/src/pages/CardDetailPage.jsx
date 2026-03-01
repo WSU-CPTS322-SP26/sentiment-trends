@@ -1,6 +1,6 @@
 import { mockCards } from "../../mocks/data/mock_data";
 import { useParams } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 const CardDetailPage = () => {
 
@@ -20,7 +20,7 @@ const card = mockCards.find(c => c.id === Number(id));
             <p>Neutral Sentiment: {card.neutral_sentiment}</p>
             <p>Positive Sentiment: {card.positive_sentiment}</p>
             <p>Compound Sentiment: {card.compound_sentiment}</p>
-            Back to <a href="/">home</a>
+            Back to <Link to="/">home</Link>
         </div>
     );
 }
