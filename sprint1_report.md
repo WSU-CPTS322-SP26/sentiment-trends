@@ -1,5 +1,7 @@
 # Sprint 1 Report (1/12/2026 - 2/28/2026)
 
+
+
 ## What's New (User Facing)
 
 - Topic card grid on the home page displaying sentiment breakdown bars (positive, neutral, negative) per topic
@@ -57,3 +59,5 @@ Here are changes we plan to implement in the next sprint:
 - Set up Supabase database to persist fetched posts and computed scores
 - Set up github actions to routinely fetch and analyze data
 
+## Demo Video
+https://youtu.be/C5dpw4XIiRM
