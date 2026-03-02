@@ -13,7 +13,17 @@ const Card = ({card}) => {
                 <h2 className={styles.cardTitle}>{card.title}</h2>
             </Link>
             <div className={styles.cardBody}>
-                <p>Compound Sentiment: {card.compound_sentiment * 100}%</p>
+                <p> 
+                    <strong>
+                        {card.compound_sentiment * 100}%
+                    </strong> 
+                    {
+                    card.compound_sentiment < 0.5 && card.compound_sentiment > 0.1 ? " Slightly Positive" :
+                    card.compound_sentiment > 0.1 ? " Overwhelmingly Positive" :
+                    card.compound_sentiment < -0.1 && card.compound_sentiment > -0.5 ? " Slightly Negative" :
+                    card.compound_sentiment < -0.1 ? " Overwhelmingly Negative" :
+                    " Neutral"
+                }</p>
                 <Bar negative={card.negative_sentiment} 
                     neutral={card.neutral_sentiment} 
                     positive={card.positive_sentiment} 
