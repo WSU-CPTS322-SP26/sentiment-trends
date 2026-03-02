@@ -1,8 +1,8 @@
-// Export all constants from a single file
-export { colors } from "./colors";
-export { spacing } from "./spacing";
-export { breakpoints, mediaQueries } from "./breakpoints";
-export { css } from "./css";
+// // Export all constants from a single file
+// export { colors } from "./colors";
+// export { spacing } from "./spacing";
+// export { breakpoints, mediaQueries } from "./breakpoints";
+// export { css } from "./css";
 
 // App-specific constants
 export const appConfig = {
