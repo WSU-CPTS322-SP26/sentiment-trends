@@ -168,7 +168,7 @@ All endpoints return JSON. Authentication errors return `{"error": "..."}` with 
 
 ## Additional Documentation
 
-[![branch: docs](https://img.shields.io/badge/branch-dev-blue.svg)](https://github.com/WSU-CPTS322-SP26/sentiment-trends/tree/docs)
+[![branch: docs](https://img.shields.io/badge/branch-docs-blue)](https://github.com/WSU-CPTS322-SP26/sentiment-trends/tree/docs)
 
 ---
 
