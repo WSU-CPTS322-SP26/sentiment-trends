@@ -37,109 +37,199 @@ export const mockCards = [
     id: 1,
     title: "Bitcoin",
     image: bitcoin,
-    sentiment: "📈 Positive sentiment 📈"
+    category: "Finance",
+    description: "The world's first decentralized digital currency.",
+    negative_sentiment: 0.4,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.3,
+    compound_sentiment: 0.0
   },
   {
     id: 2,
     title: "OpenAI",
     image: openai,
-    sentiment: "📉 Negative sentiment 📉"
+    category: "Technology",
+    description: "AI research lab known for ChatGPT and GPT models.",
+    negative_sentiment: 0.4,
+    neutral_sentiment: 0.4,
+    positive_sentiment: 0.2,
+    compound_sentiment: -0.2
   },
   {
     id: 3,
     title: "Taylor Swift",
     image: taylor_swift,
-    sentiment: "📈 Positive sentiment 📈"
+    category: "Entertainment",
+    description: "Grammy-winning singer-songwriter and pop superstar.",
+    negative_sentiment: 0.2,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.5,
+    compound_sentiment: 0.3
   },
   {
     id: 4,
     title: "Super Bowl LX",
     image: super_bowl,
-    sentiment: "📈 Positive sentiment 📈"
+    category: "Sports",
+    description: "The 60th edition of the NFL championship game.",
+    negative_sentiment: 0.1,
+    neutral_sentiment: 0.2,
+    positive_sentiment: 0.7,
+    compound_sentiment: 0.5
   },
   {
     id: 5,
     title: "Apple",
     image: apple,
-    sentiment: "📉 Neutral sentiment 📉"
+    category: "Technology",
+    description: "Consumer electronics and software company behind iPhone and Mac.",
+    negative_sentiment: 0.3,
+    neutral_sentiment: 0.4,
+    positive_sentiment: 0.3,
+    compound_sentiment: 0.0
   },
   {
     id: 6,
     title: "Tesla",
     image: tesla,
-    sentiment: "📉 Negative sentiment 📉"
+    category: "Technology",
+    description: "Electric vehicle and clean energy company founded by Elon Musk.",
+    negative_sentiment: 0.5,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.2,
+    compound_sentiment: -0.3
   },
   {
     id: 7,
     title: "S&P 500",
     image: sp500,
-    sentiment: "📈 Positive sentiment 📈"
+    category: "Finance",
+    description: "Stock market index tracking 500 large U.S. companies.",
+    negative_sentiment: 0.2,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.5,
+    compound_sentiment: 0.3
   },
   {
     id: 8,
     title: "Billie Eilish",
     image: billie_eilish,
-    sentiment: "📈 Positive sentiment 📈"
+    category: "Music",
+    description: "Chart-topping singer known for hits like \"Bad Guy\" and \"Happier Than Ever.\"",
+    negative_sentiment: 0.1,
+    neutral_sentiment: 0.2,
+    positive_sentiment: 0.7,
+    compound_sentiment: 0.5
   },
   {
     id: 9,
     title: "Amazon",
     image: amazon,
-    sentiment: "📉 Negative sentiment 📉"
+    category: "Business",
+    description: "E-commerce and cloud computing giant.",
+    negative_sentiment: 0.4,
+    neutral_sentiment: 0.4,
+    positive_sentiment: 0.2,
+    compound_sentiment: -0.2
   },
-    {
+  {
     id: 10,
     title: "Bitcoin",
     image: bitcoin,
-    sentiment: "📈 Positive sentiment 📈"
+    category: "Finance",
+    description: "The world's first decentralized digital currency.",
+    negative_sentiment: 0.4,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.3,
+    compound_sentiment: 0.0
   },
   {
     id: 11,
     title: "OpenAI",
     image: openai,
-    sentiment: "📉 Negative sentiment 📉"
+    category: "Technology",
+    description: "AI research lab known for ChatGPT and GPT models.",
+    negative_sentiment: 0.4,
+    neutral_sentiment: 0.4,
+    positive_sentiment: 0.2,
+    compound_sentiment: -0.2
   },
   {
     id: 12,
     title: "Taylor Swift",
     image: taylor_swift,
-    sentiment: "📈 Positive sentiment 📈"
+    category: "Music",
+    description: "Grammy-winning singer-songwriter and pop superstar.",
+    negative_sentiment: 0.2,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.5,
+    compound_sentiment: 0.3
   },
   {
     id: 13,
     title: "Super Bowl LX",
     image: super_bowl,
-    sentiment: "📈 Positive sentiment 📈"
+    category: "Sports",
+    description: "The 60th edition of the NFL championship game.",
+    negative_sentiment: 0.1,
+    neutral_sentiment: 0.2,
+    positive_sentiment: 0.7,
+    compound_sentiment: 0.5
   },
   {
     id: 14,
     title: "Apple",
     image: apple,
-    sentiment: "📉 Neutral sentiment 📉"
+    category: "Technology",
+    description: "Consumer electronics and software company behind iPhone and Mac.",
+    negative_sentiment: 0.3,
+    neutral_sentiment: 0.4,
+    positive_sentiment: 0.3,
+    compound_sentiment: 0.0
   },
   {
     id: 15,
     title: "Tesla",
     image: tesla,
-    sentiment: "📉 Negative sentiment 📉"
+    category: "Technology",
+    description: "Electric vehicle and clean energy company founded by Elon Musk.",
+    negative_sentiment: 0.5,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.2,
+    compound_sentiment: -0.3
   },
   {
     id: 16,
     title: "S&P 500",
     image: sp500,
-    sentiment: "📈 Positive sentiment 📈"
+    category: "Finance",
+    description: "Stock market index tracking 500 large U.S. companies.",
+    negative_sentiment: 0.2,
+    neutral_sentiment: 0.3,
+    positive_sentiment: 0.5,
+    compound_sentiment: 0.3
   },
   {
     id: 17,
     title: "Billie Eilish",
     image: billie_eilish,
-    sentiment: "📈 Positive sentiment 📈"
+    category: "Music",
+    description: "Chart-topping singer known for hits like \"Bad Guy\" and \"Happier Than Ever.\"",
+    negative_sentiment: 0.1,
+    neutral_sentiment: 0.2,
+    positive_sentiment: 0.7,
+    compound_sentiment: 0.5
   },
   {
     id: 18,
     title: "Amazon",
     image: amazon,
-    sentiment: "📉 Negative sentiment 📉"
+    category: "Business",
+    description: "E-commerce and cloud computing giant.",
+    negative_sentiment: 0.4,
+    neutral_sentiment: 0.4,
+    positive_sentiment: 0.2,
+    compound_sentiment: -0.2
   }
 ]
 

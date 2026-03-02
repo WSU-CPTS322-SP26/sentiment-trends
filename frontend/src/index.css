@@ -6,6 +6,11 @@
   --color-primary: #5b8cff;
   --color-secondary: #e5e5e5;
 
+  /* Bar Colors */
+  --color-bar-negative: #b2303d;
+  --color-bar-neutral: #8a8a8a;
+  --color-bar-positive: #33c175;
+
   /* Main Colors */
   --color-white: #ffffff;
   --color-black: #000000;
@@ -23,7 +28,7 @@
 
   /* Text Colors */
   --color-text-primary: #000000;
-  --color-text-secondary: #7e7e7e;
+  --color-text-secondary: #797979;
   --color-text-light: #ffffff;
   --color-text-muted: #a7a8aa;
 
@@ -111,4 +116,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  margin: 0;
 }
