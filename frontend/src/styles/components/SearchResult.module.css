@@ -1,0 +1,8 @@
+.searchResult {
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+}
+
+.searchResult:hover {
+    background-color: var(--color-background);
+}
