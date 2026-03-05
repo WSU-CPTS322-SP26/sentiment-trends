@@ -1,4 +1,4 @@
-import config
+from backend import config
 from flask import Flask, jsonify
 from flask_cors import CORS
 
