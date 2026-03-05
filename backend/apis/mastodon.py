@@ -1,4 +1,4 @@
-import config
+from backend import config
 from mastodon import Mastodon
 
 
