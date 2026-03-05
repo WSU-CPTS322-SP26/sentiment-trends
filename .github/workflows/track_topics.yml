@@ -27,4 +27,6 @@ jobs:
           BLUESKY_SESSION_STRING: ${{ secrets.BLUESKY_SESSION_STRING }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: python backend/services/track_topics.py
+        run: |
+          export PYTHONPATH="$PWD"
+          python backend/services/track_topics.py
