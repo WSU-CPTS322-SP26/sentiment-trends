@@ -1,0 +1,38 @@
+name: Track Topics
+
+on:
+  schedule:
+    # Runs every 6 hours; adjust cron as needed
+    - cron: '0 */6 * * *'
+  workflow_dispatch:  # allows manual run
+
+jobs:
+  track_topics:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Set up Python
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+
+      # Run track_topics.py with environment variables
+      - name: Run topic tracking
+        env:
+          BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          BLUESKY_SESSION_STRING: ${{ secrets.BLUESKY_SESSION_STRING }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python backend/services/track_topics.py
