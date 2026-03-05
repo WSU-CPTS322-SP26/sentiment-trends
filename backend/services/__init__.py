@@ -1,3 +1,3 @@
-from services import sentiment
+from . import sentiment
 
 __all__ = ["sentiment"]
