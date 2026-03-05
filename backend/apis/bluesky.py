@@ -1,4 +1,4 @@
-import config
+from backend import config
 from atproto import Client
 
 
