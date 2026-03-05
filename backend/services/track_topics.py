@@ -2,7 +2,7 @@
 import json
 import os
 from datetime import datetime
-from backend import bluesky_data  # your existing analysis/processing file
+from backend import bluesky_data, sentiment  # your existing analysis/processing file
 
 # Optional: Supabase client
 from supabase import create_client, Client  # make sure supabase-py is in requirements
