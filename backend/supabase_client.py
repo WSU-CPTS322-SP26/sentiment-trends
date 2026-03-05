@@ -13,6 +13,7 @@ supabase = create_client(url, key)
 #test query
 response = supabase.table("users").select("*").limit(1).execute()
 
+
 print("connection successful")
 print(response.data)
 
