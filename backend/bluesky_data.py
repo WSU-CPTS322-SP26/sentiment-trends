@@ -1,5 +1,5 @@
 from backend.apis import bluesky, mastodon
-from utils.helpers import bluesky_uri_to_url, sentiment_label, strip_html, strip_urls
+from backend.utils.helpers import bluesky_uri_to_url, sentiment_label, strip_html, strip_urls
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer  # type: ignore[import-untyped]
 
 sia = SentimentIntensityAnalyzer()
