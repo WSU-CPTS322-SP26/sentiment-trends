@@ -6,8 +6,12 @@ from backend import bluesky_data  # your existing analysis/processing file
 from backend.services import sentiment     # sentiment is in backend/services/
 
 
-# Optional: Supabase client
-from supabase import create_client, Client  # make sure supabase-py is in requirements
+# Optional: Supabase client (keep import optional so the script can still run)
+try:
+    from supabase import Client, create_client  # type: ignore[import-untyped]
+except Exception:  # pragma: no cover
+    Client = None  # type: ignore[assignment]
+    create_client = None  # type: ignore[assignment]
 
 # Topics to track
 TOPICS = ["python", "ai", "bluesky"]
@@ -25,8 +29,13 @@ SUPABASE_URL = os.environ.get("SUPABASE_URL") or (getattr(config, "SUPABASE_URL"
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY") or (getattr(config, "SUPABASE_KEY", None))
 
 # Initialize Supabase client if credentials exist
-supabase: Client | None = None
+supabase: "Client | None" = None
 if SUPABASE_URL and SUPABASE_KEY:
+    if create_client is None:
+        raise RuntimeError(
+            "Supabase credentials are set, but the `supabase` package isn't installed. "
+            "Add `supabase` to backend/requirements.txt."
+        )
     supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 def save_to_supabase(topic: str, data: dict):
