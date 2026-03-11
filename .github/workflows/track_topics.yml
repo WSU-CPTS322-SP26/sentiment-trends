@@ -1,9 +1,9 @@
-name: Track Topics
+name: Track Topics with Supabase
 
 on:
   push:
-    branches: [ '*' ]         # runs on any branch
-  workflow_dispatch:          # allows manual runs
+    branches: [ '*' ]         # run on any branch
+  workflow_dispatch:          # allow manual runs
 
 jobs:
   track_topics:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repo
+      # 1. Checkout the repo
       - uses: actions/checkout@v3
 
       # 2. Set up Python
@@ -30,9 +30,17 @@ jobs:
 
       # 4. Install dependencies
       - name: Install dependencies
-        run: python -m pip install --upgrade pip && pip install -r backend/requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
 
-      # 5. Run your Python script
+      # 5. Show debug info for Supabase environment variables
+      - name: Debug Supabase env
+        run: |
+          echo "SUPABASE_URL exists? ${SUPABASE_URL:+yes}"
+          echo "SUPABASE_KEY exists? ${SUPABASE_KEY:+yes}"
+
+      # 6. Run your Python script
       - name: Run topic tracking
         env:
           BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
