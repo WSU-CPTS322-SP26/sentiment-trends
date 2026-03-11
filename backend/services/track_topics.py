@@ -2,8 +2,58 @@ from datetime import datetime
 import json
 from backend import bluesky_data  # your analysis file
 import os
+from datetime import datetime
+from backend import bluesky_data  # your existing analysis/processing file
+from backend.services import sentiment     # sentiment is in backend/services/
 
+
+# Optional: Supabase client (keep import optional so the script can still run)
+try:
+    from supabase import Client, create_client  # type: ignore[import-untyped]
+except Exception:  # pragma: no cover
+    Client = None  # type: ignore[assignment]
+    create_client = None  # type: ignore[assignment]
+
+# Topics to track
 TOPICS = ["python", "ai", "bluesky"]
+
+# Load credentials (env vars override config.py)
+try:
+    from backend import config
+except ImportError:
+    config = None
+
+BLUESKY_HANDLE = os.environ.get("BLUESKY_HANDLE") or (getattr(config, "BLUESKY_HANDLE", None))
+BLUESKY_APP_PASSWORD = os.environ.get("BLUESKY_APP_PASSWORD") or (getattr(config, "BLUESKY_APP_PASSWORD", None))
+BLUESKY_SESSION_STRING = os.environ.get("BLUESKY_SESSION_STRING") or (getattr(config, "BLUESKY_SESSION_STRING", None))
+SUPABASE_URL = os.environ.get("SUPABASE_URL") or (getattr(config, "SUPABASE_URL", None))
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY") or (getattr(config, "SUPABASE_KEY", None))
+
+# Initialize Supabase client if credentials exist
+supabase: "Client | None" = None
+if SUPABASE_URL and SUPABASE_KEY:
+    if create_client is None:
+        raise RuntimeError(
+            "Supabase credentials are set, but the `supabase` package isn't installed. "
+            "Add `supabase` to backend/requirements.txt."
+        )
+    supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+def save_to_supabase(topic: str, data: dict):
+    """Insert analyzed topic data into Supabase (table: 'topics')."""
+    if supabase is None:
+        print("Supabase client not configured. Skipping DB insert.")
+        return
+    try:
+        # Customize your table/columns as needed
+        response = supabase.table("topics").insert({
+            "topic": topic,
+            "timestamp": datetime.utcnow().isoformat(),
+            "data": json.dumps(data)
+        }).execute()
+        print(f"Inserted into Supabase: {response}")
+    except Exception as e:
+        print(f"Supabase insert error: {e}")
 
 def main():
     os.makedirs("data", exist_ok=True)  # make sure folder exists
