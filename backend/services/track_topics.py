@@ -77,10 +77,15 @@ def main():
     
     for topic in TOPICS:
         result = bluesky_data.analyze_topic(topic, limit_per_platform=25, top_n=5)
+        
+        # Save locally
         filename = f"data/{topic.replace(' ', '_')}_{timestamp}.json"
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(result, f, ensure_ascii=False, indent=2)
         print(f"Saved {filename}")
+
+    # Send to Supabase
+    save_to_supabase(topic, result)
 
 if __name__ == "__main__":
     main()
