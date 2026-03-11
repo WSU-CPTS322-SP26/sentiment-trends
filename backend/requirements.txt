@@ -4,4 +4,4 @@ atproto
 python-dotenv
 vaderSentiment
 Mastodon.py
-supabase
+supabase-py

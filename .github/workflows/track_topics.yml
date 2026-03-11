@@ -45,8 +45,7 @@ jobs:
         env:
           BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
-          BLUESKY_SESSION_STRING: ${{ secrets.BLUESKY_SESSION_STRING }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
-          PYTHONPATH="$PWD" python backend/services/track_topics.py
+          PYTHONPATH="$PWD" python backend/services/track_topics.py 
