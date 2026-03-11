@@ -20,11 +20,10 @@ try:
 except ImportError:
     config = None
 
-BLUESKY_HANDLE = os.environ.get("BLUESKY_HANDLE") or getattr(config, "BLUESKY_HANDLE", None)
-BLUESKY_APP_PASSWORD = os.environ.get("BLUESKY_APP_PASSWORD") or getattr(config, "BLUESKY_APP_PASSWORD", None)
-BLUESKY_SESSION_STRING = os.environ.get("BLUESKY_SESSION_STRING") or getattr(config, "BLUESKY_SESSION_STRING", None)
-SUPABASE_URL = os.environ.get("SUPABASE_URL") or getattr(config, "SUPABASE_URL", None)
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY") or getattr(config, "SUPABASE_KEY", None)
+BLUESKY_HANDLE = os.environ.get("BLUESKY_HANDLE")
+BLUESKY_APP_PASSWORD = os.environ.get("BLUESKY_APP_PASSWORD")
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 
 # Initialize Supabase client if credentials exist
 supabase: "Client | None" = None
