@@ -1,0 +1,73 @@
+{
+  "topic": "python",
+  "total_posts": 23,
+  "per_platform_counts": {
+    "bluesky": 23,
+    "mastodon": 0
+  },
+  "unified": {
+    "positive_pct": 52.17,
+    "neutral_pct": 43.48,
+    "negative_pct": 4.35
+  },
+  "top_posts": [
+    {
+      "platform": "bluesky",
+      "id": "bafyreihkmbieiyc72gsyzqfcdyjqxlk2vddogulfihdyl2qevymzis275e",
+      "text": "🐍 ALBUS 🐍 \nBall python \n\nStill searching for a loving home. \nPlease text 508-287-0227\nALL FOR THE ANIMALS INC.\nWARREN, RI\n\nBio 👇👇\nwww.petfinder.com/scales-fins-...",
+      "author": "sandy174.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:22rdnpgskckdbvsbgqjaiajs/post/3mg226qck7225",
+      "like_count": 554,
+      "repost_count": 172,
+      "compound": 0.7351,
+      "label": "positive"
+    },
+    {
+      "platform": "bluesky",
+      "id": "bafyreibqxgnmbhiiu4utq45z4ccvuly52uhmz3rfspgf2n5qarntunju7q",
+      "text": "What’sss up? Why don’t you flop down onto these thicc peachy cheeks and enjoy a moment of rest? \n\ngift art for Vadersan of his adorable ball python gal 🐍 💕 \n\nmade with markers & acrylic paint \n#scalie #snek #nsfwfurry #furryart #furrypinup #snake #thicc",
+      "author": "silkyfangs.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:4ypr5ymxuptnniyzemqczf5v/post/3mg3mxpkojk2k",
+      "like_count": 430,
+      "repost_count": 95,
+      "compound": 0.9111,
+      "label": "positive"
+    },
+    {
+      "platform": "bluesky",
+      "id": "bafyreieszt7xbpv4hwetgbf362egjksjvfyp32mwkciiy6mcvpup2ogfci",
+      "text": "Distance Between Two Cities in Python \n\nPython for GIS & Spatial Intelligence pythonclcoding.gumroad.com/l/Python-For...",
+      "author": "clcoding.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:2x7ykaepypo2nktkb3tlhsfh/post/3mg5zd6kfps2e",
+      "like_count": 65,
+      "repost_count": 3,
+      "compound": 0.4767,
+      "label": "positive"
+    },
+    {
+      "platform": "bluesky",
+      "id": "bafyreia4cggdvakn2fju3ly657l4n7pxyt57sr3qu3yn42iulveypp7wam",
+      "text": "PDF Table with borders in Python\n\n100 Python Projects — From Beginner to Expert pythonclcoding.gumroad.com/l/100PythonP...",
+      "author": "clcoding.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:2x7ykaepypo2nktkb3tlhsfh/post/3mganmejopk2u",
+      "like_count": 64,
+      "repost_count": 4,
+      "compound": 0.0,
+      "label": "neutral"
+    },
+    {
+      "platform": "bluesky",
+      "id": "bafyreieha426lh6ubvezmoka4zq4rid5kwo27f67fjxxpiszvlnzenvnam",
+      "text": "Interactive Counter with ipywidgets in Python",
+      "author": "clcoding.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:2x7ykaepypo2nktkb3tlhsfh/post/3mg4xpje42k2k",
+      "like_count": 56,
+      "repost_count": 6,
+      "compound": 0.0,
+      "label": "neutral"
+    }
+  ],
+  "errors": {
+    "mastodon": "Credentials not set. Set MASTODON_CLIENT_KEY, MASTODON_CLIENT_SECRET, and MASTODON_ACCESS_TOKEN in .env"
+  }
+}

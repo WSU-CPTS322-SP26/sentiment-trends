@@ -1,0 +1,73 @@
+{
+  "topic": "ai",
+  "total_posts": 24,
+  "per_platform_counts": {
+    "bluesky": 24,
+    "mastodon": 0
+  },
+  "unified": {
+    "positive_pct": 29.17,
+    "neutral_pct": 29.17,
+    "negative_pct": 41.67
+  },
+  "top_posts": [
+    {
+      "platform": "bluesky",
+      "id": "bafyreiadeeiuu4zo55fhpcxxuxrme3q5giwu5ni52vf5myfhodgytgapsq",
+      "text": "Calling AI \"slop\" has been one of the most effective instances of the public rebranding a product and it pisses them off.",
+      "author": "stevensantos.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:g2hqtujsl45xmqltb2imckup/post/3mg44nzgk3c22",
+      "like_count": 16399,
+      "repost_count": 5084,
+      "compound": 0.2484,
+      "label": "positive"
+    },
+    {
+      "platform": "bluesky",
+      "id": "bafyreif7j4xuiz752477vqpyo5dm7vis7uxoofeknd6ldwkjvwoygero7q",
+      "text": "Hi hello just QRPing some info abt this coming in from the other site. This news is fake, it was a hallucination.",
+      "author": "kataphraktanna.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:qfimgbsnqmicvvh5hqlc4ttl/post/3mgagrwn5cc22",
+      "like_count": 3123,
+      "repost_count": 1982,
+      "compound": -0.4767,
+      "label": "negative"
+    },
+    {
+      "platform": "bluesky",
+      "id": "bafyreibezaiqveefkluraggssz6xi34v4gxra52k23qb3xqtty7pj5phze",
+      "text": "Hey everyone! You can upload all your financial and employment info to Elon’s AI. What could go wrong?",
+      "author": "ronfilipkowski.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:t6ubj2wlhc34awzcymh3qpur/post/3mg76kk4lvk2r",
+      "like_count": 2370,
+      "repost_count": 572,
+      "compound": -0.5255,
+      "label": "negative"
+    },
+    {
+      "platform": "bluesky",
+      "id": "bafyreigwayy7dwk3r3m3axjryqypb5cgjeozse4ycvpakuyk752ldvbczm",
+      "text": "And BOOM goes the dynamite. To all the AI Bros who have slid into my mentions to tell me that you CAN in fact copyright AI materials, the Supreme Court has told you to go suck rocks. A prompt is not authorship. And if there is no author, there is no valid copyright.\n\nwww.engadget.com/ai/the-supre...",
+      "author": "crobertcargill.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:kfdiz4ohpkjfceecgiiideek/post/3mg4h7zdxzs2b",
+      "like_count": 2181,
+      "repost_count": 748,
+      "compound": -0.25,
+      "label": "negative"
+    },
+    {
+      "platform": "bluesky",
+      "id": "bafyreihbewqb52ledkdanhtnpzjd4bc2w3tq53a2nr32qkt626ncginp5u",
+      "text": "just trained AI to remember all of my friends' birthdays, send an automated AI-generated email saying \"happy birthday,\" call them using an AI-generated video of me, scan all of their online info so i buy the perfect birthday gift, which i'll deliver using an AGI robot that looks like me",
+      "author": "dieworkwear.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:ks3gpa6ftoyaq7hmf6c4qx4c/post/3mg44sulots2h",
+      "like_count": 2270,
+      "repost_count": 114,
+      "compound": 0.9423,
+      "label": "positive"
+    }
+  ],
+  "errors": {
+    "mastodon": "Credentials not set. Set MASTODON_CLIENT_KEY, MASTODON_CLIENT_SECRET, and MASTODON_ACCESS_TOKEN in .env"
+  }
+}
