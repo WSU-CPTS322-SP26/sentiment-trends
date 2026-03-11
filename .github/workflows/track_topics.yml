@@ -2,13 +2,8 @@ name: Track Topics
 
 on:
   push:
-    branches: [ '*' ]        # runs on pushes to all branches
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to run this workflow on'
-        required: false
-        default: 'main'
+    branches: [ '*' ]         # runs on any branch
+  workflow_dispatch:          # allows manual runs
 
 jobs:
   track_topics:
@@ -16,17 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Check out the repo
+      # 1. Checkout repo
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.inputs.branch || github.ref_name }}
 
       # 2. Set up Python
       - uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
-      # 3. Cache Python dependencies
+      # 3. Cache pip dependencies
       - name: Cache pip
         uses: actions/cache@v3
         with:
@@ -39,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --upgrade pip && pip install -r backend/requirements.txt
 
-      # 5. Run the topic tracking script
+      # 5. Run your Python script
       - name: Run topic tracking
         env:
           BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
