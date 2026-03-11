@@ -10,6 +10,12 @@ jobs:
     name: Track Topics Job
     runs-on: ubuntu-latest
 
+    env:
+      BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+      BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+
     steps:
       # 1. Checkout the repo
       - uses: actions/checkout@v3
@@ -34,18 +40,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
 
-      # 5. Show debug info for Supabase environment variables
+      # 5. Debug environment
       - name: Debug Supabase env
         run: |
           echo "SUPABASE_URL exists? ${SUPABASE_URL:+yes}"
           echo "SUPABASE_KEY exists? ${SUPABASE_KEY:+yes}"
 
-      # 6. Run your Python script
+      # 6. Run script
       - name: Run topic tracking
-        env:
-          BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
-          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
-          PYTHONPATH="$PWD" python backend/services/track_topics.py 
+          PYTHONPATH="$PWD" python backend/services/track_topics.py
