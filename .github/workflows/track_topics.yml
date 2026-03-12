@@ -2,8 +2,8 @@ name: Track Topics with Supabase
 
 on:
   push:
-    branches: [ '*' ]         # run on any branch
-  workflow_dispatch:          # allow manual runs
+    branches: [ '*' ]
+  workflow_dispatch:
 
 jobs:
   track_topics:
@@ -14,18 +14,15 @@ jobs:
       BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
       BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-      SUPABASE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
 
     steps:
-      # 1. Checkout the repo
       - uses: actions/checkout@v3
 
-      # 2. Set up Python
       - uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
-      # 3. Cache pip dependencies
       - name: Cache pip
         uses: actions/cache@v3
         with:
@@ -34,19 +31,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      # 4. Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
 
-      # 5. Debug environment
       - name: Debug Supabase env
         run: |
           echo "SUPABASE_URL exists? ${SUPABASE_URL:+yes}"
-          echo "SUPABASE_KEY exists? ${SUPABASE_KEY:+yes}"
+          echo "SUPABASE_SERVICE_KEY exists? ${SUPABASE_SERVICE_KEY:+yes}"
 
-      # 6. Run script
       - name: Run topic tracking
         run: |
           PYTHONPATH="$PWD" python backend/services/track_topics.py
