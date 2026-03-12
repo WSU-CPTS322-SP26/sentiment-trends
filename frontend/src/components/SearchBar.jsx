@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { FiSearch } from "react-icons/fi";
+import { useNavigate } from 'react-router';
 import { mockSearch } from '../../mocks/data/mock_data';
 import styles from "../styles/components/SearchBar.module.css";
 
 export const SearchBar = ({ setResults }) => {
   const [input, setInput] = useState("");
+  const navigate = useNavigate();
 
   const fetchData = (value) => {
     const results = mockSearch.filter((search) => {
@@ -23,6 +25,12 @@ export const SearchBar = ({ setResults }) => {
     fetchData(value);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && input.trim()) {
+      navigate(`/topic/${encodeURIComponent(input.trim())}`);
+    }
+  };
+
     return (
       <div className={styles.inputWrapper}>
         <FiSearch className={styles.searchIcon} />
@@ -31,6 +39,7 @@ export const SearchBar = ({ setResults }) => {
           placeholder="Type to search..." 
           value={input}
           onChange={(e) => handleChange(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
       </div>
     );
