@@ -21,10 +21,10 @@ const TopicDetailPage = () => {
     return (
         <div>
             <h1>Sentiment Analysis: {topic.toUpperCase()}</h1>
-            {/* TODO: add compound sentiment, this should be an easy fix in the backend to get this added. */}
+            <p>Compound Sentiment: {data?.unified.avg_compound}</p>
             <p>Positive: {data?.unified.positive_pct}%</p>
-            <p>Neutral: {data.unified.neutral_pct}%</p>
-            <p>Negative: {data.unified.negative_pct}%</p>
+            <p>Neutral: {data?.unified.neutral_pct}%</p>
+            <p>Negative: {data?.unified.negative_pct}%</p>
             Back to <Link to="/">home</Link>
         </div>
     );

@@ -126,6 +126,7 @@ def analyze_topic(
         "positive_pct": pct(counts["positive"]),
         "neutral_pct": pct(counts["neutral"]),
         "negative_pct": pct(counts["negative"]),
+        "avg_compound": round(sum(p["compound"] for p in all_scored) / total, 4) if total else 0.0
     }
 
     bluesky_posts = [p for p in all_scored if p["platform"] == "bluesky"]
