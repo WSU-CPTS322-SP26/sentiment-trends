@@ -3,7 +3,7 @@ import json
 import os
 
 from backend import bluesky_data
-from backend.services import sentiment  # noqa: F401 (import kept if used elsewhere)
+from backend.services import sentiment  # noqa: F401 (keep if used elsewhere)
 
 # Optional Supabase import so the script can still run without it
 try:
@@ -35,24 +35,22 @@ else:
 
 
 def save_to_supabase(topic: str, compound_score: float):
-    """Insert analyzed topic data into Supabase (table: topic_sentiment_data)."""
+    """Insert average compound score into Supabase (table: topic_sentiment_data)."""
     if supabase is None:
         print(f"Supabase client not configured. Skipping insert for topic: {topic}")
         return
 
     try:
-        response = (
-            supabase.table("topic_sentiment_data")
-            .insert(
-                {
-                    "topic": topic,
-                    "timestamp": datetime.utcnow().isoformat(),
-                    "compound": compound_score,
-                }
-            )
-            .execute()
-        )
-        print(f"Inserted topic '{topic}' into Supabase")
+        supabase.table("topic_sentiment_data").insert(
+            {
+                "topic": topic,
+                "timestamp": datetime.utcnow().isoformat(),
+                "compound": compound_score,
+            }
+        ).execute()
+
+        print(f"Inserted topic '{topic}' into Supabase with compound {compound_score:.4f}")
+
     except Exception as e:
         print(f"Supabase insert error for topic '{topic}': {e}")
 
@@ -76,13 +74,14 @@ def main():
             json.dump(result, f, ensure_ascii=False, indent=2)
         print(f"Saved {filename}")
 
-        # Extract compound score (assumes `result` has a key like 'compound')
-        compound_score = result.get("compound")
-        if compound_score is None:
-            print(f"No compound score found for topic '{topic}', skipping Supabase insert.")
+        # Compute average compound score
+        posts = result.get("posts", [])
+        if posts:
+            compound_scores = [p.get("compound", 0.0) for p in posts]
+            avg_compound = sum(compound_scores) / len(compound_scores)
+            save_to_supabase(topic, avg_compound)
         else:
-            # Insert numeric compound score into Supabase
-            save_to_supabase(topic, compound_score)
+            print(f"No posts found for topic '{topic}', skipping Supabase insert.")
 
 
 if __name__ == "__main__":
