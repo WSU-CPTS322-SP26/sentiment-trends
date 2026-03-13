@@ -1,0 +1,73 @@
+{
+  "topic": "bluesky",
+  "total_posts": 25,
+  "per_platform_counts": {
+    "bluesky": 25,
+    "mastodon": 0
+  },
+  "unified": {
+    "positive_pct": 28.0,
+    "neutral_pct": 56.0,
+    "negative_pct": 16.0
+  },
+  "top_posts": [
+    {
+      "platform": "bluesky",
+      "id": "bafyreifwyq5csf5werekg6yvpdj7pyo5spa3umb5fx6bnr7xgikphvhyhm",
+      "text": "Average Bluesky staff meeting",
+      "author": "ela-bambust.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:7534z7ircjndl3loyzsxmuve/post/3mgbqjdules2a",
+      "like_count": 1396,
+      "repost_count": 466,
+      "compound": 0.0,
+      "label": "neutral"
+    },
+    {
+      "platform": "bluesky",
+      "id": "bafyreifo3h3q3wpxeyjmgrxdf3fnnqrooqvexzssrkmogtmqxdbo5zewpa",
+      "text": "Hello Bluesky people! I had a walk today & saw little hints that Spring time cometh! Wishing all of you lovely Bluesky ppl a delightful evening, & a restful night.🌛🌃",
+      "author": "jacqueline2024.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:27t5dcg3nnv3dbraonf45woh/post/3mg4kccvurc22",
+      "like_count": 1561,
+      "repost_count": 115,
+      "compound": 0.9115,
+      "label": "positive"
+    },
+    {
+      "platform": "bluesky",
+      "id": "bafyreiaj3mln76toyrifwrsunbxcygkthv6kpvtz2z5yxbuatcqc52b63y",
+      "text": "Love how Bluesky staff just sounds like Resident Evil villains now",
+      "author": "ela-bambust.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:7534z7ircjndl3loyzsxmuve/post/3mgbfurymjk2x",
+      "like_count": 683,
+      "repost_count": 207,
+      "compound": -0.4767,
+      "label": "negative"
+    },
+    {
+      "platform": "bluesky",
+      "id": "bafyreiapfw7dl5itu6dtrttgjdlyv6p7vkl7zcdpw2yzk63pzechklho74",
+      "text": "This is one of the curlers on the USA Paralympic curling team and I told him today that he should post about his Paralympic experience on BlueSky because people on BlueSky get very excited whenever anybody doing anything cool in the world posts through it on BlueSky instead of other websites",
+      "author": "rodger.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:srnkqtcpptdtesojmwbgoek2/post/3mgbiecdlqs2o",
+      "like_count": 693,
+      "repost_count": 113,
+      "compound": 0.6115,
+      "label": "positive"
+    },
+    {
+      "platform": "bluesky",
+      "id": "bafyreifccyog3o7vsldmtwrndhnvdcglr3rah7cymyv6skdysnbknj3dqm",
+      "text": "How I arrived on Bluesky",
+      "author": "radiofreetom.bsky.social",
+      "url": "https://bsky.app/profile/did:plc:kbmf4lv4o6uvuvrfzpw2jbhj/post/3mg7777iizc2n",
+      "like_count": 608,
+      "repost_count": 22,
+      "compound": 0.0,
+      "label": "neutral"
+    }
+  ],
+  "errors": {
+    "mastodon": "Credentials not set. Set MASTODON_CLIENT_KEY, MASTODON_CLIENT_SECRET, and MASTODON_ACCESS_TOKEN in .env"
+  }
+}
