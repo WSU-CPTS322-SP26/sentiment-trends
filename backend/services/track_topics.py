@@ -2,10 +2,11 @@ from datetime import datetime
 import json
 import os
 
-from backend.apis import bluesky_data, bluesky
+from backend.apis import bluesky    # bluesky.py is in backend/apis/
 from backend.services import sentiment  # assume sentiment.analyze_text(text) returns VADER scores
 
-# Optional Supabase import
+from backend import bluesky_data        # bluesky_data.py is in backend/
+
 try:
     from supabase import create_client
 except Exception:
