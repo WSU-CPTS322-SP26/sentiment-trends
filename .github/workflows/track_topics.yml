@@ -30,26 +30,14 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('backend/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-<<<<<<< HEAD
-=======
-
->>>>>>> 6d12b1b24ed914e31545cb84a9c687f4771f12aa
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
-<<<<<<< HEAD
-=======
-
->>>>>>> 6d12b1b24ed914e31545cb84a9c687f4771f12aa
       - name: Debug Supabase env
         run: |
           echo "SUPABASE_URL exists? ${SUPABASE_URL:+yes}"
           echo "SUPABASE_SERVICE_KEY exists? ${SUPABASE_SERVICE_KEY:+yes}"
-<<<<<<< HEAD
-=======
-
->>>>>>> 6d12b1b24ed914e31545cb84a9c687f4771f12aa
       - name: Run topic tracking
         run: |
           PYTHONPATH="$PWD" python backend/services/track_topics.py
