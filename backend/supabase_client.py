@@ -1,10 +1,6 @@
 import os
 from dotenv import load_dotenv
 from supabase import create_client
-<<<<<<< HEAD
-#push to test actions
-=======
->>>>>>> 6d12b1b24ed914e31545cb84a9c687f4771f12aa
 
 load_dotenv()
 
