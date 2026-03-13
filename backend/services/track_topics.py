@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-# track_topics.py
 import json
 import os
 from datetime import datetime
