@@ -4,6 +4,7 @@ import os
 
 from backend.apis import bluesky    # bluesky.py is in backend/apis/
 from backend.services import sentiment  # assume sentiment.analyze_text(text) returns VADER scores
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer  # type: ignore[import-untyped]
 
 from backend import bluesky_data        # bluesky_data.py is in backend/
 
