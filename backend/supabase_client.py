@@ -19,11 +19,7 @@ print(response.data)
 
 
 
-#test insertions
-supabase.table("users").insert({
-    "name": "Test User",
-    "email": "sentimentTrendsTest@example.com"
-}).execute()
+
 
 
 supabase.table("users").insert({
