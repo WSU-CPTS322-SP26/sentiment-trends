@@ -20,15 +20,15 @@ except ImportError:
     config = None
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL") or getattr(config, "SUPABASE_URL", None)
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY") or getattr(config, "SUPABASE_KEY", None)
+SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_KEY") or getattr(config, "SUPABASE_KEY", None)
 
-if not SUPABASE_URL or not SUPABASE_KEY:
+if not SUPABASE_URL or not SUPABASE_SERVICE_KEY:
     raise RuntimeError("Supabase credentials not set.")
 
 if create_client is None:
     raise RuntimeError("Supabase package not installed. Add `supabase` to requirements.txt.")
 
-supabase: "Client" = create_client(SUPABASE_URL, SUPABASE_KEY)
+supabase: "Client" = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
 
 def save_to_supabase(positive: float, negative: float, neutral: float):
