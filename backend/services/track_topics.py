@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from supabase import create_client
+from datetime import datetime, date
 
 load_dotenv()
 
@@ -17,10 +18,18 @@ print("connection successful")
 print(response.data)
 
 
-supabase.table("table").insert({
-    "positive_sentiment": 0.0,
-    "negative_sentiment": 0.0,
-    "neutral_sentiment": 0.0
+positive = 0
+negative = 0
+neutral = 0
 
-}).execute()
 
+today = date.today().isoformat()
+supabase.table("table").upsert(
+    {
+        "id": today,
+        "positive_sentiment": positive,
+        "negative_sentiment": negative,
+        "neutral_sentiment": neutral
+    },
+    on_conflict="id"
+).execute()
