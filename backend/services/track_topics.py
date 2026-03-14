@@ -18,9 +18,9 @@ print(response.data)
 
 
 supabase.table("table").insert({
-    "positive_sentiment": "pos",
-    "negative_sentiment": "neg",
-    "neutral_sentiment": "neu"
+    "positive_sentiment": 0.0,
+    "negative_sentiment": 0.0,
+    "neutral_sentiment": 0.0
 
 }).execute()
 
