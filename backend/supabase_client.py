@@ -16,6 +16,9 @@ response = supabase.table("users").select("*").limit(1).execute()
 print("connection successful")
 print(response.data)
 
+
+
+
 #test insertions
 supabase.table("users").insert({
     "name": "Test User",
