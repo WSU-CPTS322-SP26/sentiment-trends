@@ -142,6 +142,33 @@ All endpoints return JSON. Authentication errors return `{"error": "..."}` with 
 
 ---
 
+## Testing
+
+Backend tests are split into **unit** (mock only, no external calls) and **integration** (real remote APIs when credentials are set). Run them from the `backend` directory.
+
+**Unit tests (CI default; no secrets required):**
+
+```bash
+cd backend
+python -m pytest tests -m unit -v
+```
+
+**Integration tests (hits Bluesky/Mastodon when credentials are in env):**
+
+```bash
+cd backend
+python -m pytest tests -m integration -v
+```
+
+**Run all tests:**
+
+```bash
+cd backend
+python -m pytest tests -v
+```
+
+---
+
 ## Known Issues
 
 1. **Frontend uses mock data**: [HomePage.jsx](frontend/src/pages/HomePage.jsx) renders cards from [mocks/data/mock_data.js](frontend/mocks/data/mock_data.js) and no live calls to the backend are made from the UI. [src/services/api.js](frontend/src/services/api.js) exists but is only wired to the health check endpoint, not to search or sentiment flows.

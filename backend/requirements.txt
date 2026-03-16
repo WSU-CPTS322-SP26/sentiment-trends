@@ -4,3 +4,4 @@ atproto
 python-dotenv
 vaderSentiment
 Mastodon.py
+pytest
