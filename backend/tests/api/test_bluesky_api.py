@@ -1,7 +1,10 @@
-# API layer tests for apis.bluesky; config and atproto Client are mocked.
+# API layer tests for apis.bluesky; config and atproto Client are mocked. Marked unit.
+import pytest
 from unittest.mock import MagicMock, patch
 
 import apis.bluesky as bluesky
+
+pytestmark = pytest.mark.unit
 
 
 def test_authenticated_client_returns_error_when_no_credentials():

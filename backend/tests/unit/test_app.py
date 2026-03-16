@@ -1,4 +1,7 @@
-# unit tests for app index route.
+# unit tests for app index route; mock only.
+import pytest
+
+pytestmark = pytest.mark.unit
 
 
 def test_index_returns_200(client):

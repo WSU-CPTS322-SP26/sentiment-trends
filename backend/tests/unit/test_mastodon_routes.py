@@ -1,6 +1,8 @@
 # unit tests for mastodon routes; API layer is mocked.
+import pytest
 from unittest.mock import patch
 
+pytestmark = pytest.mark.unit
 
 # request: GET /mastodon/timeline and /mastodon/search; mock apis.mastodon so no real calls.
 @patch("routes.mastodon_routes.mastodon")

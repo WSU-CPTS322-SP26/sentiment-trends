@@ -1,7 +1,10 @@
-# API layer tests for apis.mastodon; config and Mastodon client are mocked.
+# API layer tests for apis.mastodon; config and Mastodon client are mocked. Marked unit.
+import pytest
 from unittest.mock import MagicMock, patch
 
 import apis.mastodon as mastodon
+
+pytestmark = pytest.mark.unit
 
 
 def test_authenticated_client_returns_error_when_no_token():

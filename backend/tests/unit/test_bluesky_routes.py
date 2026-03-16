@@ -1,6 +1,8 @@
 # unit tests for bluesky routes; API layer is mocked.
+import pytest
 from unittest.mock import patch
 
+pytestmark = pytest.mark.unit
 
 # request: GET /bluesky/timeline and /bluesky/search; mock apis.bluesky so no real calls.
 @patch("routes.bluesky_routes.bluesky")
