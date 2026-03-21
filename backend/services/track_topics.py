@@ -30,6 +30,10 @@ client.login(bluesky_handle, bluesky_password)
 sia = SentimentIntensityAnalyzer()
 
 
+supabase = create_client(supabase_url, supabase_key)
+
+
+
 
 results = client.app.bsky.feed.search_posts(
     {
@@ -40,38 +44,24 @@ results = client.app.bsky.feed.search_posts(
 
 for post in results.posts:
     print(post.record.text)
-    print(sia.polarity_scores(post.record.text))
-for post in results.posts:
-    print(post.record.text)
+    scores = sia.polarity_scores(post.record.text)
+    negative = scores['neg']
+    neutral = scores['neu']
+    positive = scores['pos']
+    compound = scores['compound']
 
 
+    row_id = str(uuid.uuid4())
 
-
-
-
-
-
-supabase = create_client(supabase_url, supabase_key)
-
-
-
-
-
-
-positive = 0
-negative = 0
-neutral = 0
-
-row_id = str(uuid.uuid4())
-
-today = date.today().isoformat()
-supabase.table("data").upsert(
-    {
-        "id": row_id,
-        "pos": positive,
-        "neu": neutral,
-        "neg": negative,
-        "topic": "the topic!"
-    },
-    on_conflict="id"
-).execute()
+    today = date.today().isoformat()
+    supabase.table("data").upsert(
+        {
+            "id": row_id,
+            "pos": positive,
+            "neu": neutral,
+            "neg": negative,
+            "topic": "the topic!",
+            "compound": compound
+        },
+        on_conflict="id"
+    ).execute()
