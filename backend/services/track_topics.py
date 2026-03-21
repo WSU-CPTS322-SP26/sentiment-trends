@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from supabase import create_client
 from datetime import datetime, date
-from nltk.sentiment import SentimentIntensityAnalyzer
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from atproto import Client
 import uuid
 
