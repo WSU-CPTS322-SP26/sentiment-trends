@@ -37,7 +37,7 @@ supabase = create_client(supabase_url, supabase_key)
 
 results = client.app.bsky.feed.search_posts(
     {
-        "q": "Ford Motor Company",
+        "q": "Tesla",
         "limit": 10
     }
 )
