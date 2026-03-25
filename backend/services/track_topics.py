@@ -5,6 +5,7 @@ from datetime import datetime, date
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from atproto import Client
 import uuid
+from pytrends.request import TrendReq
 
 #First)   get trending topics
 #Second)  load 20 posts for each trending topic
@@ -12,6 +13,26 @@ import uuid
 #Fourth)  store sentiment data and topic in supabase db
 
 
+#topics should have many categories
+#
+#like currencies, celebs, companies and stocks
+
+
+
+#trending topics
+topic1 = "Meta"
+topic2 = "Tesla"
+topic3 = "Instagram"
+topic4 = "AI"
+topic5 = "Ford"
+topic6 = ""
+
+
+topics = {
+"Meta",
+"Tesla"
+
+}
 
 
 load_dotenv()
@@ -34,7 +55,7 @@ supabase = create_client(supabase_url, supabase_key)
 
 
 
-
+for topic in topics
 results = client.app.bsky.feed.search_posts(
     {
         "q": "Tesla",
