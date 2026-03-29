@@ -7,7 +7,6 @@ from atproto import Client
 import uuid
 import requests
 from pytrends.request import TrendReq
-import feedparser
 
 from bluesky_topics import get_search_topics
 
