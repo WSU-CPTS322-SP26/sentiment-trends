@@ -5,37 +5,33 @@ from datetime import datetime, date
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from atproto import Client
 import uuid
+import requests
 from pytrends.request import TrendReq
+import feedparser
+
+from bluesky_topics import get_search_topics
+
+
+load_dotenv()
+
 
 #First)   get trending topics
-#Second)  load 20 posts for each trending topic
+#Second)  load # of posts for each trending topic
 #Third)   run sentiment analysis on each post
-#Fourth)  store sentiment data and topic in supabase db
+#Fourth)  store sentiment data and topic in supabase
 
 
 #topics should have many categories
 #
-#like currencies, celebs, companies and stocks
+#examples: currencies, celebs, companies or stocks
 
 
 
-#trending topics
-topic1 = "Meta"
-topic2 = "Tesla"
-topic3 = "Instagram"
-topic4 = "AI"
-topic5 = "Ford"
-topic6 = ""
+#trending topics(hard coded)
+#trending_topics = ["Meta","Tesla","Instagram","AI","Ford"]
 
 
-topics = {
-"Meta",
-"Tesla"
 
-}
-
-
-load_dotenv()
 
 
 
@@ -43,6 +39,9 @@ bluesky_handle = os.getenv("BLUESKY_HANDLE")
 bluesky_password = os.getenv("BLUESKY_APP_PASSWORD")
 supabase_url = os.getenv("SUPABASE_URL")
 supabase_key = os.getenv("SUPABASE_SERVICE_KEY")
+
+
+
 
 client = Client()
 client.login(bluesky_handle, bluesky_password)
@@ -54,35 +53,50 @@ sia = SentimentIntensityAnalyzer()
 supabase = create_client(supabase_url, supabase_key)
 
 
+#1) read feed
+#2) extract topics
 
-for topic in topics
-results = client.app.bsky.feed.search_posts(
-    {
-        "q": "Tesla",
+source_results = client.app.bsky.feed.search_posts({
+    "q": "*",
+    "limit": 25
+})
+
+
+source_posts = source_results.posts
+trending_topics = get_search_topics()
+
+
+
+today = date.today().isoformat()
+
+
+
+for topic in trending_topics:
+    results = client.app.bsky.feed.search_posts({
+        "q": topic,
         "limit": 10
-    }
-)
-
-for post in results.posts:
-    print(post.record.text)
-    scores = sia.polarity_scores(post.record.text)
-    negative = scores['neg']
-    neutral = scores['neu']
-    positive = scores['pos']
-    compound = scores['compound']
+    })
 
 
-    row_id = str(uuid.uuid4())
+    for post in results.posts:
+        print(post.record.text)
+        scores = sia.polarity_scores(post.record.text)
+        negative = scores['neg']
+        neutral = scores['neu']
+        positive = scores['pos']
+        compound = scores['compound']
 
-    today = date.today().isoformat()
-    supabase.table("data").upsert(
-        {
-            "id": row_id,
-            "pos": positive,
-            "neu": neutral,
-            "neg": negative,
-            "topic": "the topic!",
-            "compound": compound
-        },
-        on_conflict="id"
-    ).execute()
+
+        row_id = str(uuid.uuid4())
+
+        supabase.table("data").upsert(
+            {
+                "id": row_id,
+                "pos": positive,
+                "neu": neutral,
+                "neg": negative,
+                "topic": topic,
+                "compound": compound
+            },
+            on_conflict="id"
+        ).execute()
