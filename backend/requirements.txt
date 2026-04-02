@@ -4,4 +4,6 @@ atproto
 python-dotenv
 vaderSentiment
 Mastodon.py
+supabase
+pytrends
 pytest
