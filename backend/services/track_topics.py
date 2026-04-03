@@ -1,7 +1,7 @@
 import os
-from dotenv import load_dotenv
-from supabase import create_client
 from datetime import datetime, date
+
+from config import supabase
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from atproto import Client
 import uuid
@@ -27,9 +27,6 @@ def retry_request(func, *args, retries=3, delay=2, **kwargs):
     return None
 
 
-load_dotenv()
-
-
 #First)   get trending topics
 #Second)  load # of posts for each trending topic
 #Third)   run sentiment analysis on each post
@@ -52,8 +49,6 @@ load_dotenv()
 
 bluesky_handle = os.getenv("BLUESKY_HANDLE")
 bluesky_password = os.getenv("BLUESKY_APP_PASSWORD")
-supabase_url = os.getenv("SUPABASE_URL")
-supabase_key = os.getenv("SUPABASE_SERVICE_KEY")
 
 MAX_POSTS = 200
 PAGE_SIZE = 50
@@ -64,9 +59,6 @@ client.login(bluesky_handle, bluesky_password)
 
 
 sia = SentimentIntensityAnalyzer()
-
-
-supabase = create_client(supabase_url, supabase_key)
 
 
 #1) read feed
