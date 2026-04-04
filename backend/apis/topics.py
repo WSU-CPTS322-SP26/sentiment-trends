@@ -11,6 +11,14 @@ def _topic_row(item: dict) -> dict:
         "categories": item.get("categories"),
     }
 
+# returns int for order of popularity of a topic
+def _search_volume_sort_key(row: dict) -> int:
+    v = row.get("search_volume")
+    # if volume is a bool or non numeric put it at the bottom
+    if isinstance(v, bool) or not isinstance(v, (int, float)):
+        return -1
+    return int(v)
+
 # hours default to 24, everything else to null.
 def get_trending_now(
     *,
@@ -19,8 +27,10 @@ def get_trending_now(
     category_id: int | None = None,
     hl: str | None = None,
     only_active: bool | None = None,
+    max: int | None = None,
 ) -> dict | tuple[None, str]:
     # stable "topics" list plus full serpapi json under "raw". if hours is none, serpapi defaults to past 24 hours.
+    # if max is set, return the top max topics by search_volume; raw is still the full SerpAPI payload.
     if not config.SERPAPI_KEY:
         return (None, "Credentials not set. Set SERPAPI_KEY in .env")
 
@@ -56,6 +66,8 @@ def get_trending_now(
 
     rows = result.get("trending_searches") or []
     topics = [_topic_row(row) for row in rows if isinstance(row, dict)]
+    if max is not None:
+        topics = sorted(topics, key=_search_volume_sort_key, reverse=True)[:max]
     payload = result.as_dict() if hasattr(result, "as_dict") else dict(result)
 
     return {"topics": topics, "raw": payload}
