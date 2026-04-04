@@ -254,23 +254,48 @@ def main() -> int:
         return 1
 
     topics = raw.get("topics") or []
+    valid_rows = [
+        t
+        for t in topics
+        if isinstance(t, dict) and (t.get("query") or "").strip()
+    ]
+    total = len(valid_rows)
+    if total == 0:
+        log.warning("no valid topics in response (raw count=%d)", len(topics))
+        return 0
+
+    log.info(
+        "run: %d topic(s) to process (requested --max-topics=%d, raw rows=%d)",
+        total,
+        args.max_topics,
+        len(topics),
+    )
+
     # same timestamp for every topic in this run (one batch)
     run_at = datetime.now(timezone.utc).isoformat()
 
+    ok = 0
     # each step has its own try so one bad topic doesn't abort the whole run
-    for topic_row in topics:
-        if not isinstance(topic_row, dict):
-            continue
+    for idx, topic_row in enumerate(valid_rows, start=1):
         name = (topic_row.get("query") or "").strip()
-        if not name:
-            continue
+        pct_before = round(100 * (idx - 1) / total) if total else 0
+        pct_after = round(100 * idx / total) if total else 0
 
         try:
             topic_id = _upsert_topic_row(topic_row)
         except Exception as e:
-            log.exception("upsert topic %r failed: %s", name, e)
+            log.exception(
+                "[%d/%d %d%%] upsert topic %r failed: %s", idx, total, pct_before, name, e
+            )
             continue
 
+        log.info(
+            "[%d/%d %d%%] fetching posts + sentiment for %r",
+            idx,
+            total,
+            pct_before,
+            name,
+        )
         try:
             analysis = analyze_topic(
                 name,
@@ -279,11 +304,15 @@ def main() -> int:
                 top_n=args.top_n,
             )
         except Exception as e:
-            log.exception("analyze_topic %r failed: %s", name, e)
+            log.exception(
+                "[%d/%d %d%%] analyze_topic %r failed: %s", idx, total, pct_before, name, e
+            )
             continue
 
         if analysis.get("errors"):
-            log.warning("topic %r analyze warnings: %s", name, analysis["errors"])
+            log.warning(
+                "[%d/%d] topic %r analyze warnings: %s", idx, total, name, analysis["errors"]
+            )
 
         unified = analysis.get("unified") or {}
         per_platform = analysis.get("per_platform_counts") or {}
@@ -296,16 +325,46 @@ def main() -> int:
                 per_platform=per_platform,
             )
         except Exception as e:
-            log.exception("daily_topic_sentiment insert for %r failed: %s", name, e)
+            log.exception(
+                "[%d/%d %d%%] daily_topic_sentiment insert for %r failed: %s",
+                idx,
+                total,
+                pct_before,
+                name,
+                e,
+            )
             continue
 
         try:
             _replace_top_posts(topic_id, analysis.get("top_posts") or [])
         except Exception as e:
-            log.exception("top_posts replace for %r failed: %s", name, e)
+            log.exception(
+                "[%d/%d %d%%] top_posts replace for %r failed: %s",
+                idx,
+                total,
+                pct_before,
+                name,
+                e,
+            )
             continue
 
-        log.info("tracked %r (topic_id=%s)", name, topic_id)
+        ok += 1
+        n_posts = int(analysis.get("total_posts") or 0)
+        n_bs = int(per_platform.get("bluesky") or 0)
+        n_md = int(per_platform.get("mastodon") or 0)
+        log.info(
+            "[%d/%d %d%%] tracked %r topic_id=%s posts=%d (bluesky=%d mastodon=%d)",
+            idx,
+            total,
+            pct_after,
+            name,
+            topic_id,
+            n_posts,
+            n_bs,
+            n_md,
+        )
+
+    log.info("run finished: %d ok, %d failed (of %d)", ok, total - ok, total)
 
     return 0
 
