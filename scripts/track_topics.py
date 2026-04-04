@@ -1,10 +1,5 @@
 """
-CLI: fetch Google Trends topics, analyze sentiment across Bluesky/Mastodon,
-and persist to Supabase (topics, daily_topic_sentiment, top_posts).
-
-Run from repo root: python scripts/track_topics.py
-Requires backend deps (pip install -r backend/requirements.txt) and env vars
-(SUPABASE_URL, SUPABASE_SERVICE_KEY, SERPAPI_KEY, Bluesky/Mastodon as needed).
+python track_topics.py --max-topics 150 --bluesky-limit 1000 --mastodon-limit 100 --top-n 5
 """
 
 from __future__ import annotations
