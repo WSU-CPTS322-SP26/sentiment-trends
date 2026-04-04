@@ -1,3 +1,8 @@
+"""
+Probably don't need these to be backend routes because the frontend will only use analyze and supabase data.
+Everything lies in the actual function used in analyzing.
+"""
+
 from flask import Blueprint, jsonify, request
 
 from apis import bluesky

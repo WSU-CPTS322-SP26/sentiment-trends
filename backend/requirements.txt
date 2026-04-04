@@ -1,8 +1,10 @@
 flask
 flask-cors
+requests
 atproto
 python-dotenv
 vaderSentiment
 Mastodon.py
 supabase
 pytrends
+serpapi
