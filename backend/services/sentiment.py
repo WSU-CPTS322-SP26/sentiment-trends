@@ -4,7 +4,6 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer  # type: ig
 
 sia = SentimentIntensityAnalyzer()
 
-# Per-request pagination cap inside platform collectors (bluesky.py / mastodon.py).
 MAX_LIMIT_PER_PLATFORM = 500
 
 
