@@ -6,3 +6,4 @@ vaderSentiment
 Mastodon.py
 supabase
 pytrends
+serpapi
