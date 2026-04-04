@@ -1,5 +1,11 @@
+import time
+
 import config
 from atproto import Client
+
+# Pagination guardrails for analyze_topic collectors (see services.sentiment).
+_MAX_PAGES_PER_PLATFORM = 15
+_PAGINATION_SLEEP_SEC = 0.5
 
 
 def _authenticated_client() -> tuple[Client | None, str | None]:
@@ -55,8 +61,11 @@ def search_posts(
     client, err = _authenticated_client()
     if not client:
         return (None, err or "Auth failed")
-    if limit is not None and (limit < 1):
-        limit = 25
+    if limit is not None:
+        if limit < 1:
+            limit = 25
+        else:
+            limit = min(100, limit)
     params = {"q": q.strip(), "limit": limit, "cursor": cursor, "sort": sort}
     if tag:
         params["tag"] = tag
@@ -67,3 +76,64 @@ def search_posts(
         "cursor": getattr(resp, "cursor", None),
         "hits_total": getattr(resp, "hits_total", None),
     }
+
+
+def collect_search_posts(
+    q: str,
+    *,
+    limit: int,
+    sort: str = "latest",
+    tag: list[str] | None = None,
+    max_pages: int = _MAX_PAGES_PER_PLATFORM,
+    sleep_sec: float = _PAGINATION_SLEEP_SEC,
+) -> dict | tuple[None, str]:
+    """Fetch up to *limit* posts using app.bsky.feed.searchPosts cursors (max 100 per request)."""
+    if not q or not q.strip():
+        return {"posts": [], "warning": None}
+    if limit < 1:
+        return {"posts": [], "warning": None}
+
+    accumulated: list[dict] = []
+    cursor: str | None = None
+    pages = 0
+    warning: str | None = None
+
+    while len(accumulated) < limit and pages < max_pages:
+        chunk = min(100, limit - len(accumulated))
+        try:
+            result = search_posts(q, limit=chunk, cursor=cursor, sort=sort, tag=tag)
+        except Exception as e:
+            err_msg = str(e)
+            if "429" in err_msg or "Too Many Requests" in err_msg:
+                return (None, "Rate limited by Bluesky (429)")
+            return (None, err_msg)
+
+        if isinstance(result, tuple) and result[0] is None:
+            return (None, result[1] or "unknown error")
+
+        if not isinstance(result, dict):
+            return (None, "unexpected response from search_posts")
+
+        batch = result.get("posts") or []
+        if not batch:
+            break
+
+        accumulated.extend(batch)
+        cursor = result.get("cursor")
+        pages += 1
+
+        if len(accumulated) >= limit:
+            break
+        if not cursor:
+            break
+
+        time.sleep(sleep_sec)
+
+    accumulated = accumulated[:limit]
+
+    if len(accumulated) < limit and pages >= max_pages:
+        warning = (
+            f"stopped after {max_pages} requests (page cap); got {len(accumulated)} of {limit}"
+        )
+
+    return {"posts": accumulated, "warning": warning}
