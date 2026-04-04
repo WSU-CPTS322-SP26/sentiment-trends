@@ -4,6 +4,8 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer  # type: ig
 
 sia = SentimentIntensityAnalyzer()
 
+MAX_LIMIT_PER_PLATFORM = 500
+
 
 def score_post(text: str) -> dict:
     """Run VADER on text; return {compound, label}."""
@@ -54,34 +56,55 @@ def normalize_mastodon_post(post: dict) -> dict | None:
     except Exception:
         return None
 
-# find out how to get top mastadon posts
+
 PLATFORMS: list[dict] = [
     {
         "name": "bluesky",
-        "fetch": bluesky.search_posts,
+        "fetch": bluesky.collect_search_posts,
         "normalize": normalize_bluesky_post,
         "fetch_kwargs": {"sort": "top"},
     },
     {
         "name": "mastodon",
-        "fetch": mastodon.search_posts,
+        "fetch": mastodon.collect_search_posts,
         "normalize": normalize_mastodon_post,
         "fetch_kwargs": {},
     },
 ]
 
 
+def _clamp_limit(n: int) -> int:
+    return max(1, min(MAX_LIMIT_PER_PLATFORM, n))
+
+
 def analyze_topic(
     topic: str,
-    limit_per_platform: int = 25,
+    *,
+    bluesky_limit: int | None = None,
+    mastodon_limit: int | None = None,
+    limit: int | None = None,
     top_n: int = 5,
 ) -> dict:
     """
     Fetch posts for *topic* from every registered platform, score each with
     VADER, and return top_n posts plus unified sentiment percentages.
 
+    Limits: each platform uses its own arg if set, else shared *limit*, else
+    defaults (Bluesky 100, Mastodon 25). Values are clamped to 1–500.
+
+    Collectors paginate with a small delay between pages and a page cap per
+    platform (see apis.bluesky / apis.mastodon). Partial results may include
+    an entry in *errors* when the page cap stops the fetch early.
+
     Can be called directly by a DB ingestion script — no HTTP layer needed.
     """
+    eff_bluesky = bluesky_limit if bluesky_limit is not None else (limit if limit is not None else 100)
+    eff_mastodon = mastodon_limit if mastodon_limit is not None else (limit if limit is not None else 25)
+    limits_by_name = {
+        "bluesky": _clamp_limit(eff_bluesky),
+        "mastodon": _clamp_limit(eff_mastodon),
+    }
+
     all_scored: list[dict] = []
     per_platform_counts: dict[str, int] = {}
     errors: dict[str, str] = {}
@@ -91,15 +114,24 @@ def analyze_topic(
         fetch = platform["fetch"]
         normalize = platform["normalize"]
         fetch_kwargs: dict = platform.get("fetch_kwargs") or {}
+        target = limits_by_name[name]
 
-        result = fetch(topic, limit=limit_per_platform, **fetch_kwargs)
+        result = fetch(topic, limit=target, **fetch_kwargs)
 
         if isinstance(result, tuple) and result[0] is None:
             errors[name] = result[1] or "unknown error"
             per_platform_counts[name] = 0
             continue
 
-        raw_posts: list[dict] = result.get("posts", []) if isinstance(result, dict) else []
+        if not isinstance(result, dict):
+            errors[name] = "unexpected fetch response"
+            per_platform_counts[name] = 0
+            continue
+
+        if result.get("warning"):
+            errors[name] = result["warning"]
+
+        raw_posts: list[dict] = result.get("posts", [])
         platform_scored: list[dict] = []
 
         for raw in raw_posts:
@@ -118,7 +150,6 @@ def analyze_topic(
     for post in all_scored:
         counts[post["label"]] += 1
 
-    # percent of scores that are pos, neg, nue
     def pct(n: int) -> float:
         return round(n / total * 100, 2) if total else 0.0
 

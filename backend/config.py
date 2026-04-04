@@ -6,6 +6,12 @@ try:
 except ImportError:
     pass
 
+from supabase import create_client
+
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
+supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+
 BLUESKY_APP_VIEW_URL = os.environ.get("BLUESKY_APP_VIEW_URL", "https://public.api.bsky.app")
 BLUESKY_HANDLE = os.environ.get("BLUESKY_HANDLE")
 BLUESKY_APP_PASSWORD = os.environ.get("BLUESKY_APP_PASSWORD")
@@ -15,3 +21,5 @@ MASTODON_INSTANCE_URL = os.environ.get("MASTODON_INSTANCE_URL", "https://mastodo
 MASTODON_CLIENT_KEY = os.environ.get("MASTODON_CLIENT_KEY")
 MASTODON_CLIENT_SECRET = os.environ.get("MASTODON_CLIENT_SECRET")
 MASTODON_ACCESS_TOKEN = os.environ.get("MASTODON_ACCESS_TOKEN")
+
+SERPAPI_KEY = os.environ.get("SERPAPI_KEY")
