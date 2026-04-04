@@ -7,4 +7,5 @@ vaderSentiment
 Mastodon.py
 supabase
 pytrends
+pytest
 serpapi
