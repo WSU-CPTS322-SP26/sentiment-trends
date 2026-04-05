@@ -7,6 +7,7 @@ import { mockCards, mockCategories } from "../../mocks/data/mock_data";
 import { appConfig } from "../constants";
 import Bar from "../components/Bar";
 import { LuChartBar } from "react-icons/lu";
+import Loader from "../components/Loader";
 
 
 const TopicDetailPage = () => {
@@ -38,7 +39,29 @@ const TopicDetailPage = () => {
             .finally(() => setLoading(false));
     }, [topic]);
 
-    if (loading) return <p>Loading...</p>;
+    if (loading)  
+    {
+        return (
+            <div className={styles.DetailPage}>
+            <Header title={appConfig.name} 
+                onSearch={setResults} 
+                results={results}
+                categories={ordered}
+            />
+            <div className={`${styles.pageContainer} min-h-screen bg-zinc-50`}>
+                <div className={`${styles.content} py-4`}>
+                    <div className={`${styles.panel} space-y-4 border-2 border-neutral-200`}>
+                        <h1 className="text-3xl font-bold text-neutral-900">
+                            Sentiment Analysis: {topic.toUpperCase()}
+                        </h1>
+                        <Loader />
+                    </div>
+                </div>
+            </div>
+        </div>
+        );
+    }
+    
     if (error) return <p>Error: {error.message}</p>;
 
     const compound = data?.unified?.avg_compound;
