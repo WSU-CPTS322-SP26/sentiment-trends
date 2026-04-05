@@ -6,7 +6,10 @@
     margin: 0 auto;
     margin-bottom: var(--spacing-sm);
     max-width: 1300px;
+    width: 100%;
     min-width: 0;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
 
     mask-image: linear-gradient(
         to right,
@@ -20,11 +23,21 @@
         black 95%,
         transparent 100%
     );
-    scrollbar-width: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-secondary) transparent;
 }
 
 .categoryContainer::-webkit-scrollbar {
-    display: none;
+    height: 6px;
+}
+
+.categoryContainer::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.categoryContainer::-webkit-scrollbar-thumb {
+    background-color: var(--color-secondary);
+    border-radius: 3px;
 }
 
 .categoryContainer.scrolled {

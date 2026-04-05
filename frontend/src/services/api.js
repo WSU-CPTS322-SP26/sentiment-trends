@@ -16,6 +16,8 @@ const apiRequest = async (endpoint) => {
 export const api = {
     // Get home message
     getHomeMessage: () => apiRequest(appConfig.endpoints.home),
+    // Homepage topic cards from Supabase-backed API
+    getHomepageCards: () => apiRequest(appConfig.endpoints.supabaseHome),
     // Get Sentiment Analysis data
     getSentimentAnalysis: (topic, limit = 25, top_n = 5) => 
         apiRequest(`${appConfig.endpoints.sentimentAnalysis}?topic=${encodeURIComponent(topic)}&limit=${limit}&top_n=${top_n}`)
