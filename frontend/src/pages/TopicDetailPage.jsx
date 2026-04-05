@@ -28,10 +28,14 @@ const TopicDetailPage = () => {
 
         
     useEffect(() => {
-        api.getSentimentAnalysis(topic)
-            .then(setData)
-            .catch(setError)
-            .finally(() => setLoading(false));
+    setLoading(true);
+    setError(null);
+    setData(null);
+
+    api.getSentimentAnalysis(topic)
+        .then(setData)
+        .catch(setError)
+        .finally(() => setLoading(false));
     }, [topic]);
 
     if (loading) return <p>Loading...</p>;
@@ -66,7 +70,7 @@ const TopicDetailPage = () => {
                         </h1>
                         
                         <div className="rounded-2xl border-2 border-neutral-200 bg-score-tint px-6 py-5 shadow-sm">
-                            <p className="text-sm font-bold text-neutral-550">Compound sentiment score</p>
+                            <p className="text-sm font-bold text-neutral-500">Compound sentiment score</p>
                             <p className={ `mt-1 text-4xl font-semibold tabular-nums ${sentimentColor(compound)}`}>
                                 {compound != null ? compound.toFixed(3) : "—"}
                             </p>
