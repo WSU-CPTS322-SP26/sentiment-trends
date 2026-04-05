@@ -47,19 +47,6 @@
     gap: var(--spacing-sm);
 }
 
-.sentimentSummary {
-    margin: 0;
-    text-align: center;
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-}
-
-.sentimentPhrase {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-primary);
-    font-weight: var(--font-weight-heavy);
-}
-
 .cardHeader:hover {
   color: var(--color-text-primary);
   text-decoration: underline;
