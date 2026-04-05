@@ -1,3 +1,10 @@
+@import "tailwindcss";
+
+/* tailwind stuff - playing around with it*/
+@theme {
+  --color-score-tint: #eef5fe;
+}
+
 :root {
 
   /* Primary App Color*/
@@ -7,9 +14,9 @@
   --color-secondary: #e5e5e5;
 
   /* Bar Colors */
-  --color-bar-negative: #b2303d;
-  --color-bar-neutral: #8a8a8a;
-  --color-bar-positive: #33c175;
+  --color-bar-negative: #fa2c37;
+  --color-bar-neutral: #9aa1ae;
+  --color-bar-positive: #00c44e;
 
   /* Main Colors */
   --color-white: #ffffff;
@@ -35,6 +42,7 @@
   /* Spacing */
   --spacing-xs: 4px;
   --spacing-sm: 12px;
+  --layout-inline-padding: var(--spacing-sm);
   --spacing-md: 20px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
@@ -120,4 +128,8 @@ body {
 
 html, body {
   margin: 0;
+}
+
+html {
+  scrollbar-gutter: stable;
 }

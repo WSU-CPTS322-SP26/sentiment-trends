@@ -1,6 +1,9 @@
 .searchResult {
-    padding: var(--spacing-sm) var(--spacing-md);
-    cursor: pointer;
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  display: block;
+  color: inherit;
+  border-bottom: 1px solid var(--color-secondary);
 }
 
 .searchResult:hover {
