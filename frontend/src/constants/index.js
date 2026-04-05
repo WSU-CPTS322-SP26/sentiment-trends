@@ -5,6 +5,7 @@ export const appConfig = {
     apiUrl: import.meta.env.VITE_API_URL || "http://localhost:3001",
     endpoints: {
         home: "/",
-        sentimentAnalysis: "/sentiment/analyze"
+        sentimentAnalysis: "/sentiment/analyze",
+        supabaseHome: "/supabase/home",
     },
 };

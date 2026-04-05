@@ -45,7 +45,7 @@ def get_homepage_topics() -> list[dict]:
         positive_pct, neutral_pct, negative_pct (0–100 or null), snapshot_at.
 
     Raises:
-        Exception: propagates supabase/postgrest client errors.
+        Exception: supabase/postgrest client errors.
     """
     res = (
         config.supabase.table("topics")
