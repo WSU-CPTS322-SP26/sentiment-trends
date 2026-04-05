@@ -8,7 +8,7 @@ import { appConfig } from "../constants";
 import Bar from "../components/Bar";
 import { LuChartBar } from "react-icons/lu";
 import Loader from "../components/Loader";
-
+import { toTitleCase } from "../utils/titleCase";
 
 const TopicDetailPage = () => {
     const { topic } = useParams();
@@ -52,7 +52,7 @@ const TopicDetailPage = () => {
                 <div className={`${styles.content} py-4`}>
                     <div className={`${styles.panel} space-y-4 border-2 border-neutral-200`}>
                         <h1 className="text-3xl font-bold text-neutral-900">
-                            Sentiment Analysis: {topic.toUpperCase()}
+                            Sentiment Analysis: {toTitleCase(topic)}
                         </h1>
                         <Loader />
                     </div>

@@ -6,12 +6,8 @@ import { appConfig } from "../constants";
 import { api } from "../services/api";
 import { useSearchParams } from "react-router-dom";
 import topicPlaceholder from "../assets/topic-placeholder.svg";
-
-// title-style casing for display (routing still uses raw api title)
-function toTitleCase(name) {
-  if (!name || typeof name !== "string") return name;
-  return name.replace(/\w[\w'-]*/g, (w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
-}
+import { toTitleCase } from "../utils/titleCase";
+import Loader from "../components/Loader";
 
 // all first, then only category labels that appear on at least one card
 function categoriesFromCards(cards) {
@@ -94,7 +90,7 @@ const HomePage = () => {
         categories={navbarCategories}
       />
       <div className={styles.pageContainer}>
-        {loading && <p>Loading...</p>}
+        {loading && <Loader />}
         {error && <p>Error: {error.message}</p>}
         {!loading && !error && (
           <div className={styles.cardsContainer}>
