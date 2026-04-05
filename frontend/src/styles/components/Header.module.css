@@ -31,3 +31,22 @@
     flex: auto;
     max-width: 600px;
 }
+
+.headerAbout {
+    flex: 0 0 auto;
+    margin-left: auto;
+}
+.aboutButton {
+    display: inline-block;
+    padding: 7px 20px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+    text-decoration: none;
+    border-radius: 8px;
+    background-color: var(--color-primary);
+    transition: background-color 0.15s ease
+}
+.aboutButton:hover {
+    background-color: var(--color-primary-hover);
+}
