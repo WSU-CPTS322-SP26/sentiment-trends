@@ -1,0 +1,12 @@
+.DetailPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background);
+}
+
+.pageContainer {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: var(--spacing-sm);
+}
