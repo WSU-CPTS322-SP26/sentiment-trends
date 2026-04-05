@@ -1,0 +1,12 @@
+.heading {
+  margin: 0 0 var(--spacing-md);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-heavy);
+  color: var(--color-text-primary);
+}
+
+.lead {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}

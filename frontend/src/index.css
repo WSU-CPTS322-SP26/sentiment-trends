@@ -10,7 +10,8 @@
   /* Primary App Color*/
   /* Use for: primary buttons, active states,   */
   /* links, focus rings, toggles/selected items */
-  --color-primary: #5b8cff;
+  --color-primary: #1552f0;
+  --color-primary-hover: #1249d8;
   --color-secondary: #e5e5e5;
 
   /* Bar Colors */

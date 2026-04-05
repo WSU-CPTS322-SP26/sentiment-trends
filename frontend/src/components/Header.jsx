@@ -29,6 +29,11 @@ const Header = ({ title, onSearch, results, categories }) => {
                     <SearchBar setResults={onSearch} />
                     {results?.length > 0 && <SearchResultsList results={results} />}
                 </div>
+                <div className={styles.headerAbout}>
+                    <Link to="/about" className={styles.aboutButton}>
+                        About
+                    </Link>
+                </div>
             </div>
             <Categories categories={categories} />
         </div>

@@ -1,42 +1,32 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { api } from "../services/api";
 import styles from "../styles/pages/TopicDetailPage.module.css";
 import Header from "../components/Header";
-import { mockCards, mockCategories } from "../../mocks/data/mock_data";
 import { appConfig } from "../constants";
 import Bar from "../components/Bar";
 import { LuChartBar } from "react-icons/lu";
 import Loader from "../components/Loader";
-
+import { toTitleCase } from "../utils/helpers";
+import { useHomepageCards } from "../utils/HomepageCardsContext";
 
 const TopicDetailPage = () => {
     const { topic } = useParams();
+    const { navbarCategories } = useHomepageCards();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
     const [results, setResults] = useState([]);
-    const predefinedCategories = mockCategories.map(c => c.label);
-    const fromCards = [...new Set(mockCards.map(c => c.category))];
-    const ordered = [...new Set([...predefinedCategories, ...fromCards])]
-        .filter(Boolean)
-        .map((label, i) => ({
-            id: i,
-            label,
-            href: label === "All" ? "/" : `/?category=${encodeURIComponent(label)}`
-        }));
 
-        
     useEffect(() => {
-        setLoading(true);
-        setError(null);
-        setData(null);
-
-        api.getSentimentAnalysis(topic)
-            .then(setData)
-            .catch(setError)
-            .finally(() => setLoading(false));
+    setLoading(true);
+    setError(null);
+    setData(null);
+    api
+      .getSentimentAnalysis(topic)
+      .then(setData)
+      .catch(setError)
+      .finally(() => setLoading(false));
     }, [topic]);
 
     if (loading)  
@@ -46,13 +36,13 @@ const TopicDetailPage = () => {
             <Header title={appConfig.name} 
                 onSearch={setResults} 
                 results={results}
-                categories={ordered}
+                categories={navbarCategories}
             />
             <div className={`${styles.pageContainer} min-h-screen bg-zinc-50`}>
                 <div className={`${styles.content} py-4`}>
                     <div className={`${styles.panel} space-y-4 border-2 border-neutral-200`}>
                         <h1 className="text-3xl font-bold text-neutral-900">
-                            Sentiment Analysis: {topic.toUpperCase()}
+                            Sentiment Analysis: {toTitleCase(topic)}
                         </h1>
                         <Loader />
                     </div>
@@ -83,13 +73,13 @@ const TopicDetailPage = () => {
             <Header title={appConfig.name} 
                 onSearch={setResults} 
                 results={results}
-                categories={ordered}
+                categories={navbarCategories}
             />
             <div className={`${styles.pageContainer} min-h-screen bg-zinc-50`}>
                 <div className={`${styles.content} py-4`}>
                     <div className={`${styles.panel} space-y-4 border-2 border-neutral-200`}>
                         <h1 className="text-3xl font-bold text-neutral-900">
-                            Sentiment Analysis: {topic.toUpperCase()}
+                            Sentiment Analysis: {toTitleCase(topic)}
                         </h1>
                         
                         <div className="rounded-2xl border-2 border-neutral-200 bg-score-tint px-6 py-5 shadow-sm">
