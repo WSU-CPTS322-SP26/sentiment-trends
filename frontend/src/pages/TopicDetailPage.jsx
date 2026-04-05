@@ -114,7 +114,6 @@ const TopicDetailPage = () => {
                                 positive={(positive ?? 0) / 100}
                                 neutral={(neutral ?? 0) / 100}
                                 negative={(negative ?? 0) / 100}
-                                compound={data?.unified?.avg_compound}
                             />
                         </div>
                         {topPost && (
