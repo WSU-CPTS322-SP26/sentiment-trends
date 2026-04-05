@@ -1,0 +1,32 @@
+.DetailPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background);
+}
+
+.content {
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.pageContainer {
+    flex: 1;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: var(--spacing-sm) var(--layout-inline-padding);
+    background-color: var(--color-surface);
+    min-height: 0;
+}
+
+.panel {
+  width: 100%;
+  border-radius: var(--border-radius-xl);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-xl) var(--spacing-card-padding);
+  min-height: min(72vh, 52rem);
+  box-sizing: border-box;
+}
