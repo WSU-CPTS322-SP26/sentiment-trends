@@ -28,14 +28,14 @@ const TopicDetailPage = () => {
 
         
     useEffect(() => {
-    setLoading(true);
-    setError(null);
-    setData(null);
+        setLoading(true);
+        setError(null);
+        setData(null);
 
-    api.getSentimentAnalysis(topic)
-        .then(setData)
-        .catch(setError)
-        .finally(() => setLoading(false));
+        api.getSentimentAnalysis(topic)
+            .then(setData)
+            .catch(setError)
+            .finally(() => setLoading(false));
     }, [topic]);
 
     if (loading) return <p>Loading...</p>;
