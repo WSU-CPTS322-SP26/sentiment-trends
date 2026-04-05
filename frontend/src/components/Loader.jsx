@@ -1,3 +1,4 @@
+/* Credit to: https://cssloaders.github.io */
 import styles from "../styles/components/Loader.module.css";
 
 const Loader = () => {

@@ -53,7 +53,7 @@ def get_homepage_topics() -> list[dict]:
             "id, name, category, searches, increase_pct, "
             "daily_topic_sentiment(pos_pct, neu_pct, neg_pct, created_at)"
         )
-        .order("name")
+        .order("searches", desc=True)
         .execute()
     )
     rows = res.data or []
