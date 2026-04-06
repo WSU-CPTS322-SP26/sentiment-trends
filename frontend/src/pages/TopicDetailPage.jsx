@@ -42,7 +42,7 @@ const TopicDetailPage = () => {
           });
           return;
         }
-        const live = await api.getSentimentAnalysis(topicSlug, 25, 25);
+        const live = await api.getSentimentAnalysis(topicSlug, 25, 5);
         if (cancelled) return;
         setData({
           source: "live",
@@ -163,7 +163,7 @@ const TopicDetailPage = () => {
             )}
             {data.source === "db" && snapshotAt && (
               <p className="text-sm text-neutral-500">
-                Snapshot: {new Date(snapshotAt).toLocaleString()}
+                {new Date(snapshotAt).toLocaleString()}
               </p>
             )}
 
