@@ -5,11 +5,21 @@ const API_BASE_URL = appConfig.apiUrl;
 
 // Basic API request function
 const apiRequest = async (endpoint) => {
-  const response = await fetch(`${API_BASE_URL}${endpoint}`);
-  if (!response.ok) {
-    throw new Error(`API request failed: ${response.statusText}`);
-  }
-  return response.json();
+    const response = await fetch(`${API_BASE_URL}${endpoint}`);
+    if (!response.ok) {
+        throw new Error(`API request failed: ${response.statusText}`);
+    }
+    return response.json();
+};
+
+// same as fetch but returns null on 404 (other errors still throw)
+const apiRequestNullIfNotFound = async (endpoint) => {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`);
+    if (response.status === 404) return null;
+    if (!response.ok) {
+        throw new Error(`API request failed: ${response.statusText}`);
+    }
+    return response.json();
 };
 
 // Specific API functions
@@ -21,6 +31,11 @@ export const api = {
   // Stored topic row + top_posts from Supabase (by exact topics.name)
   getTopicDetailFromDb: (topic) =>
     apiRequest(
+      `${appConfig.endpoints.supabaseTopic}?topic=${encodeURIComponent(topic)}`,
+    ),
+  // null when topic is not in the database (404); throws on other failures
+  getTopicDetailFromDbAllowMissing: (topic) =>
+    apiRequestNullIfNotFound(
       `${appConfig.endpoints.supabaseTopic}?topic=${encodeURIComponent(topic)}`,
     ),
   // Same as getTopicDetailFromDb but keyed by topics.id

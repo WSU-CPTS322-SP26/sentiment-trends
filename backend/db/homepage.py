@@ -33,6 +33,7 @@ def _topic_to_card(row: dict) -> dict:
         "positive_pct": latest.get("pos_pct") if latest else None,
         "neutral_pct": latest.get("neu_pct") if latest else None,
         "negative_pct": latest.get("neg_pct") if latest else None,
+        "avg_compound": latest.get("avg_compound") if latest else None,
         "snapshot_at": latest.get("created_at") if latest else None,
     }
 
@@ -42,7 +43,8 @@ def get_homepage_topics() -> list[dict]:
 
     Returns:
         List of card dicts: id, title, category, searches, increase_pct,
-        positive_pct, neutral_pct, negative_pct (0–100 or null), snapshot_at.
+        positive_pct, neutral_pct, negative_pct (0–100 or null),
+        avg_compound (-1..1 or null), snapshot_at.
 
     Raises:
         Exception: supabase/postgrest client errors.
@@ -51,7 +53,7 @@ def get_homepage_topics() -> list[dict]:
         config.supabase.table("topics")
         .select(
             "id, name, category, searches, increase_pct, "
-            "daily_topic_sentiment(pos_pct, neu_pct, neg_pct, created_at)"
+            "daily_topic_sentiment(pos_pct, neu_pct, neg_pct, avg_compound, created_at)"
         )
         .order("searches", desc=True)
         .execute()

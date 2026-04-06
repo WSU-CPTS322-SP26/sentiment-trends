@@ -27,17 +27,13 @@ const Card = ({ card }) => {
   const phrase = sentimentPhrase(
     card.positive_sentiment,
     card.neutral_sentiment,
-    card.negative_sentiment
+    card.negative_sentiment,
   );
 
   return (
     <div className={styles.card}>
       <Link to={`/topic/${titleForUrl}`} className={styles.cardHeader}>
-        <img
-          className={styles.cardImage}
-          src={card.image}
-          alt={heading}
-        />
+        <img className={styles.cardImage} src={card.image} alt={heading} />
         <h2 className={styles.cardTitle}>{heading}</h2>
       </Link>
       <div className={styles.cardBody}>

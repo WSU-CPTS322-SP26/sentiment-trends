@@ -32,8 +32,20 @@ def test_get_homepage_topics_maps_rows():
         "searches": 99,
         "increase_pct": 5,
         "daily_topic_sentiment": [
-            {"pos_pct": 1.0, "neu_pct": 2.0, "neg_pct": 3.0, "created_at": "2026-01-01T00:00:00Z"},
-            {"pos_pct": 10.0, "neu_pct": 20.0, "neg_pct": 70.0, "created_at": "2026-06-01T00:00:00Z"},
+            {
+                "pos_pct": 1.0,
+                "neu_pct": 2.0,
+                "neg_pct": 3.0,
+                "avg_compound": 0.1,
+                "created_at": "2026-01-01T00:00:00Z",
+            },
+            {
+                "pos_pct": 10.0,
+                "neu_pct": 20.0,
+                "neg_pct": 70.0,
+                "avg_compound": -0.42,
+                "created_at": "2026-06-01T00:00:00Z",
+            },
         ],
     }
     mock_execute = MagicMock()
@@ -60,6 +72,7 @@ def test_get_homepage_topics_maps_rows():
     assert c["positive_pct"] == 10.0
     assert c["neutral_pct"] == 20.0
     assert c["negative_pct"] == 70.0
+    assert c["avg_compound"] == -0.42
     assert c["snapshot_at"] == "2026-06-01T00:00:00Z"
 
 
@@ -87,4 +100,5 @@ def test_get_homepage_topics_no_sentiment_rows():
     assert c["positive_pct"] is None
     assert c["neutral_pct"] is None
     assert c["negative_pct"] is None
+    assert c["avg_compound"] is None
     assert c["snapshot_at"] is None

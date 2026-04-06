@@ -6,7 +6,7 @@ from db.homepage import _topic_to_card
 
 _TOPICS_SELECT = (
     "id, name, category, searches, increase_pct, "
-    "daily_topic_sentiment(pos_pct, neu_pct, neg_pct, created_at), "
+    "daily_topic_sentiment(pos_pct, neu_pct, neg_pct, avg_compound, created_at), "
     "top_posts(id, platform, author, text, like_count, repost_count, "
     "sentiment_label, sentiment_score, url)"
 )
