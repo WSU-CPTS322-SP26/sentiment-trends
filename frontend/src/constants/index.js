@@ -10,5 +10,6 @@ export const appConfig = {
         home: "/",
         sentimentAnalysis: "/sentiment/analyze",
         supabaseHome: "/supabase/home",
+        supabaseTopic: "/supabase/topic",
     },
 };
