@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import styles from "../styles/components/SearchBar.module.css";
-import { useHomepageCards } from '../utils/HomepageCardsContext';
+import { useHomepageCards } from "../utils/HomepageCardsContext";
 
 const SEARCH_RESULTS_LIMIT = 5;
 
@@ -42,16 +42,16 @@ export const SearchBar = ({ setResults }) => {
     }
   };
 
-    return (
-      <div className={styles.inputWrapper}>
-        <FiSearch className={styles.searchIcon} />
-        <input 
-          className={styles.input}
-          placeholder="Type to search..." 
-          value={input}
-          onChange={(e) => handleChange(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
-      </div>
-    );
+  return (
+    <div className={styles.inputWrapper}>
+      <FiSearch className={styles.searchIcon} />
+      <input
+        className={styles.input}
+        placeholder="Type to search..."
+        value={input}
+        onChange={(e) => handleChange(e.target.value)}
+        onKeyDown={handleKeyDown}
+      />
+    </div>
+  );
 };

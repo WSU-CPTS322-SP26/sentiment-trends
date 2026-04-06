@@ -147,7 +147,7 @@ def _insert_daily_sentiment(
     Args:
         topic_id: topics.id for this snapshot.
         created_at: ISO timestamp for the batch run.
-        unified: keys like positive_pct, neutral_pct, negative_pct.
+        unified: keys like positive_pct, neutral_pct, negative_pct, avg_compound.
         per_platform: counts, e.g. bluesky, mastodon.
 
     Returns:
@@ -159,6 +159,7 @@ def _insert_daily_sentiment(
         "pos_pct": unified.get("positive_pct"),
         "neu_pct": unified.get("neutral_pct"),
         "neg_pct": unified.get("negative_pct"),
+        "avg_compound": unified.get("avg_compound"),
         "bluesky_posts": int(per_platform.get("bluesky") or 0),
         "mastodon_posts": int(per_platform.get("mastodon") or 0),
     }
