@@ -47,6 +47,7 @@ const TopicDetailPage = () => {
             topic: fromDb.topic,
             posts: fromDb.posts ?? [],
           });
+          setSummary(fromDb?.topic?.summary ?? null);
           return;
         }
         const live = await api.getSentimentAnalysis(topicSlug, 25, 5);

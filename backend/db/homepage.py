@@ -35,6 +35,7 @@ def _topic_to_card(row: dict) -> dict:
         "negative_pct": latest.get("neg_pct") if latest else None,
         "avg_compound": latest.get("avg_compound") if latest else None,
         "snapshot_at": latest.get("created_at") if latest else None,
+        "summary": latest.get("summary") if latest else None,
     }
 
 

@@ -11,7 +11,7 @@ services:
       - FLASK_DEBUG=False
       - FLASK_RUN_PORT=3001
       - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://172.17.0.1:11434}
-      - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3:8b}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-qwen2.5:7b}
       - OLLAMA_TIMEOUT=${OLLAMA_TIMEOUT:-30}
     restart: unless-stopped
 
