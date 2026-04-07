@@ -1,27 +1,3 @@
-import { appConfig } from "../constants";
-
-// Base URL for API requests
-const API_BASE_URL = appConfig.apiUrl;
-
-// Basic API request function
-const apiRequest = async (endpoint) => {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`);
-    if (!response.ok) {
-        throw new Error(`API request failed: ${response.statusText}`);
-    }
-    return response.json();
-};
-
-// same as fetch but returns null on 404 (other errors still throw)
-const apiRequestNullIfNotFound = async (endpoint) => {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`);
-    if (response.status === 404) return null;
-    if (!response.ok) {
-        throw new Error(`API request failed: ${response.statusText}`);
-    }
-    return response.json();
-};
-
 // Specific API functions
 export const api = {
   // Get home message
@@ -48,9 +24,9 @@ export const api = {
     apiRequest(
       `${appConfig.endpoints.sentimentAnalysis}?topic=${encodeURIComponent(topic)}&limit=${limit}&top_n=${top_n}`,
     ),
+  // Generate summary on demand
+  getOllamaSummary: (topic, limit = 25, top_n = 5) =>
+    apiRequest(
+      `${appConfig.endpoints.ollamaSummary}?topic=${encodeURIComponent(topic)}&limit=${limit}&top_n=${top_n}`,
+    ),
 };
-
-getOllamaSummary: (topic, limit = 25, top_n = 5) =>
-  apiRequest(
-    `${appConfig.endpoints.ollamaSummary}?topic=${encodeURIComponent(topic)}&limit=${limit}&top_n=${top_n}`
-  ),
