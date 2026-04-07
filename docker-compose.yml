@@ -18,9 +18,8 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "3000:3000"
+      - "5001:5001"
     environment:
-      - VITE_API_URL=${VITE_API_URL:-http://localhost:3001}
+      - VITE_API_URL=http://localhost:3001
     depends_on:
       - backend
-    restart: unless-stopped
