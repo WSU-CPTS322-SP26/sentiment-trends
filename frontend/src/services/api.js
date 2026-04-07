@@ -49,3 +49,8 @@ export const api = {
       `${appConfig.endpoints.sentimentAnalysis}?topic=${encodeURIComponent(topic)}&limit=${limit}&top_n=${top_n}`,
     ),
 };
+
+getOllamaSummary: (topic, limit = 25, top_n = 5) =>
+  apiRequest(
+    `${appConfig.endpoints.ollamaSummary}?topic=${encodeURIComponent(topic)}&limit=${limit}&top_n=${top_n}`
+  ),

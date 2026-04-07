@@ -1,0 +1,26 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/app
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=production
+      - FLASK_DEBUG=False
+      - FLASK_RUN_PORT=3001
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://172.17.0.1:11434}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3:8b}
+      - OLLAMA_TIMEOUT=${OLLAMA_TIMEOUT:-30}
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=${VITE_API_URL:-http://localhost:3001}
+    depends_on:
+      - backend
+    restart: unless-stopped

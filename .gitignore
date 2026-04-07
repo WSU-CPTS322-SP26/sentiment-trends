@@ -47,3 +47,7 @@ Thumbs.db
 htmlcov/
 coverage/
 docker-compose.yml
+
+# local keys
+githubkey.txt
+githubkey.txt.pub
