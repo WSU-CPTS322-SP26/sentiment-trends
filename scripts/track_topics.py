@@ -3,7 +3,6 @@ python track_topics.py --max-topics 150 --bluesky-limit 1000 --mastodon-limit 10
 """
 
 from __future__ import annotations
-from services.summary import summarize_topic
 
 import argparse
 import logging
@@ -33,6 +32,7 @@ except ImportError:
 import config  # noqa: E402 — after sys.path
 from apis.topics import get_trending_now  # noqa: E402
 from services.sentiment import analyze_topic  # noqa: E402
+from services.summary import summarize_topic
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 log = logging.getLogger(__name__)
