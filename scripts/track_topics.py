@@ -3,6 +3,7 @@ python track_topics.py --max-topics 150 --bluesky-limit 1000 --mastodon-limit 10
 """
 
 from __future__ import annotations
+from services.summary import summarize_topic
 
 import argparse
 import logging
@@ -141,6 +142,7 @@ def _insert_daily_sentiment(
     created_at: str,
     unified: dict,
     per_platform: dict,
+    summary: str | None = None,
 ) -> None:
     """Insert one `daily_topic_sentiment` row (aggregate scores + per-platform post counts).
 
@@ -162,6 +164,7 @@ def _insert_daily_sentiment(
         "avg_compound": unified.get("avg_compound"),
         "bluesky_posts": int(per_platform.get("bluesky") or 0),
         "mastodon_posts": int(per_platform.get("mastodon") or 0),
+        "summary": summary,
     }
     config.supabase.table("daily_topic_sentiment").insert(row).execute()
 
@@ -317,13 +320,16 @@ def main() -> int:
 
         unified = analysis.get("unified") or {}
         per_platform = analysis.get("per_platform_counts") or {}
+        top_posts = analysis.get("top_posts") or []
 
         try:
+            summary_text = summarize_topic(name, top_posts)
             _insert_daily_sentiment(
                 topic_id=topic_id,
                 created_at=run_at,
                 unified=unified,
                 per_platform=per_platform,
+                summary=summary_text,
             )
         except Exception as e:
             log.exception(
