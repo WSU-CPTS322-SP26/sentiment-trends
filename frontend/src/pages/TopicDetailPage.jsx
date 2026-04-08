@@ -18,6 +18,10 @@ const TopicDetailPage = () => {
   const [error, setError] = useState(null);
   const [results, setResults] = useState([]);
 
+  const [summary, setSummary] = useState(null);
+  const [summaryLoading, setSummaryLoading] = useState(false);
+  const [summaryError, setSummaryError] = useState(null);
+
   const topicSlug = topicParam ?? "";
   const displayTitle =
     data?.topic?.title != null && data.topic.title !== ""
@@ -29,6 +33,9 @@ const TopicDetailPage = () => {
     setLoading(true);
     setError(null);
     setData(null);
+    setSummary(null);
+    setSummaryLoading(false);
+    setSummaryError(null);
 
     (async () => {
       try {
@@ -40,6 +47,7 @@ const TopicDetailPage = () => {
             topic: fromDb.topic,
             posts: fromDb.posts ?? [],
           });
+          setSummary(fromDb?.topic?.summary ?? null);
           return;
         }
         const live = await api.getSentimentAnalysis(topicSlug, 25, 5);
@@ -67,6 +75,19 @@ const TopicDetailPage = () => {
       cancelled = true;
     };
   }, [topicSlug]);
+
+  const handleGenerateSummary = async () => {
+    try {
+      setSummaryLoading(true);
+      setSummaryError(null);
+      const res = await api.getOllamaSummary(topicSlug, 25, 5);
+      setSummary(res?.summary ?? null);
+    } catch (e) {
+      setSummaryError(e);
+    } finally {
+      setSummaryLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -216,6 +237,36 @@ const TopicDetailPage = () => {
                 negative={(negative ?? 0) / 100}
               />
             </div>
+            
+            <div className="rounded-2xl border-2 border-neutral-200 bg-white px-6 py-5 shadow-sm space-y-3">
+              <h2 className="text-lg font-semibold text-neutral-900">Topic Summary</h2>
+
+              {summary ? (
+                <p className="text-sm leading-relaxed text-neutral-700 whitespace-pre-wrap">
+                  {summary}
+                </p>
+              ) : (
+                <>
+                  <p className="text-sm text-neutral-500">
+                    No stored summary available for this topic yet.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleGenerateSummary}
+                    disabled={summaryLoading}
+                    className="inline-flex items-center rounded-lg border border-neutral-300 px-3 py-2 text-sm font-medium text-neutral-800 hover:bg-neutral-100 disabled:opacity-60"
+                  >
+                    {summaryLoading ? "Generating..." : "Generate Summary"}
+                  </button>
+                  {summaryError && (
+                    <p className="text-sm text-red-600" role="alert">
+                      {summaryError.message}
+                    </p>
+                  )}
+                </>
+              )}
+            </div>
+
             <div className="space-y-4">
               <h2 className="text-base font-semibold text-neutral-800">
                 Top posts ({posts.length})

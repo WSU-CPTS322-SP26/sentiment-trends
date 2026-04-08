@@ -7,15 +7,18 @@ services:
       - ./backend:/app
     environment:
       - FLASK_APP=app.py
+      - FLASK_ENV=production
+      - FLASK_DEBUG=False
       - FLASK_RUN_PORT=3001
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://172.17.0.1:11434}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-qwen2.5:7b}
+      - OLLAMA_TIMEOUT=${OLLAMA_TIMEOUT:-30}
+    restart: unless-stopped
 
   frontend:
     build: ./frontend
     ports:
       - "5001:5001"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
     environment:
       - VITE_API_URL=http://localhost:3001
     depends_on:

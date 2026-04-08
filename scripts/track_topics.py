@@ -32,6 +32,7 @@ except ImportError:
 import config  # noqa: E402 — after sys.path
 from apis.topics import get_trending_now  # noqa: E402
 from services.sentiment import analyze_topic  # noqa: E402
+from services.summary import summarize_topic
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 log = logging.getLogger(__name__)
@@ -141,6 +142,7 @@ def _insert_daily_sentiment(
     created_at: str,
     unified: dict,
     per_platform: dict,
+    summary: str | None = None,
 ) -> None:
     """Insert one `daily_topic_sentiment` row (aggregate scores + per-platform post counts).
 
@@ -162,6 +164,7 @@ def _insert_daily_sentiment(
         "avg_compound": unified.get("avg_compound"),
         "bluesky_posts": int(per_platform.get("bluesky") or 0),
         "mastodon_posts": int(per_platform.get("mastodon") or 0),
+        "summary": summary,
     }
     config.supabase.table("daily_topic_sentiment").insert(row).execute()
 
@@ -198,7 +201,21 @@ def _replace_top_posts(topic_id: str, posts: list[dict]) -> None:
             }
         )
     config.supabase.table("top_posts").insert(rows).execute()
+    
+def _prune_to_current_snapshot(*, run_at: str, current_topic_names: set[str]) -> None:
+    # Keep only this run's snapshot rows
+    config.supabase.table("daily_topic_sentiment").delete().neq("created_at", run_at).execute()
 
+    # Delete topics not in current run (+ dependent rows)
+    res = config.supabase.table("topics").select("id,name").execute()
+    rows = res.data or []
+    stale = [r for r in rows if (r.get("name") or "").strip() not in current_topic_names]
+
+    for r in stale:
+        tid = str(r["id"])
+        config.supabase.table("top_posts").delete().eq("topic_id", tid).execute()
+        config.supabase.table("daily_topic_sentiment").delete().eq("topic_id", tid).execute()
+        config.supabase.table("topics").delete().eq("id", tid).execute()
 
 def main() -> int:
     """CLI entry: validate args, fetch trending topics, persist each to Supabase.
@@ -231,6 +248,11 @@ def main() -> int:
         type=int,
         default=DEFAULT_TOP_N,
         help=f"Top posts to store per topic (default: {DEFAULT_TOP_N})",
+    )
+    parser.add_argument(
+        "--prune",
+        action="store_true",
+        help="After ingest, remove stale rows so DB only contains this run's snapshot.",
     )
     args = parser.parse_args()
 
@@ -276,6 +298,7 @@ def main() -> int:
     run_at = datetime.now(timezone.utc).isoformat()
 
     ok = 0
+    current_topic_names: set[str] = set()
     # each step has its own try so one bad topic doesn't abort the whole run
     for idx, topic_row in enumerate(valid_rows, start=1):
         name = (topic_row.get("query") or "").strip()
@@ -289,6 +312,8 @@ def main() -> int:
                 "[%d/%d %d%%] upsert topic %r failed: %s", idx, total, pct_before, name, e
             )
             continue
+
+        current_topic_names.add(name)
 
         log.info(
             "[%d/%d %d%%] fetching posts + sentiment for %r",
@@ -317,13 +342,16 @@ def main() -> int:
 
         unified = analysis.get("unified") or {}
         per_platform = analysis.get("per_platform_counts") or {}
+        top_posts = analysis.get("top_posts") or []
 
         try:
+            summary_text = summarize_topic(name, top_posts)
             _insert_daily_sentiment(
                 topic_id=topic_id,
                 created_at=run_at,
                 unified=unified,
                 per_platform=per_platform,
+                summary=summary_text,
             )
         except Exception as e:
             log.exception(
@@ -364,6 +392,16 @@ def main() -> int:
             n_bs,
             n_md,
         )
+
+    if args.prune:
+        if ok > 0:
+            _prune_to_current_snapshot(
+                run_at=run_at,
+                current_topic_names=current_topic_names,
+            )
+            log.info("prune enabled: stale rows removed; kept %d current topic(s)", len(current_topic_names))
+        else:
+            log.warning("prune skipped: 0 topics succeeded in this run")
 
     log.info("run finished: %d ok, %d failed (of %d)", ok, total - ok, total)
 

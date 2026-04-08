@@ -11,5 +11,6 @@ export const appConfig = {
         sentimentAnalysis: "/sentiment/analyze",
         supabaseHome: "/supabase/home",
         supabaseTopic: "/supabase/topic",
+        ollamaSummary: "/ollama/summary",
     },
 };
