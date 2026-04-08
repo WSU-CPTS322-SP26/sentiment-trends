@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import styles from "../styles/pages/HomePage.module.css";
 import { appConfig } from "../constants";
 import { useSearchParams } from "react-router-dom";
-import Loader from "../components/Loader";
+import CardSkeleton from "../components/CardSkeleton";
 import { useHomepageCards } from "../utils/HomepageCardsContext";
 
 const HomePage = () => {
@@ -27,7 +27,16 @@ const HomePage = () => {
         categories={navbarCategories}
       />
       <div className={styles.pageContainer}>
-        {loading && <Loader />}
+        {loading && (
+          <div
+            className={styles.cardsContainer}
+            aria-busy="true"
+          >
+            {Array.from({ length: 8 }, (_, i) => (
+              <CardSkeleton key={i} />
+            ))}
+          </div>
+        )}
         {error && <p>Error: {error.message}</p>}
         {!loading && !error && (
           <div className={styles.cardsContainer}>
