@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import { appConfig } from "../constants";
 import Bar from "../components/Bar";
 import { LuChartBar } from "react-icons/lu";
-import TopicDetailSkeleton from "../components/TopicDetailSkeleton";
+import TopicDetailPageSkeleton from "../components/TopicDetailPageSkeleton";
 import { toTitleCase } from "../utils/helpers";
 import { useHomepageCards } from "../utils/HomepageCardsContext";
 
@@ -106,7 +106,7 @@ const TopicDetailPage = () => {
               <h1 className="text-3xl font-bold text-neutral-900">
                 Sentiment Analysis: {toTitleCase(topicSlug)}
               </h1>
-              <TopicDetailSkeleton />
+              <TopicDetailPageSkeleton />
             </div>
           </div>
         </div>
