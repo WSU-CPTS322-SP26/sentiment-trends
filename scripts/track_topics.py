@@ -1,6 +1,5 @@
 """
-python track_topics.py --max-topics 150 --bluesky-limit 1000 --mastodon-limit 100 --top-n 5
-python track_topics.py --with-images   # also fetch up to 3 image urls per topic (SerpAPI)
+python track_topics.py --max-topics 25 --bluesky-limit 250 --mastodon-limit 100 --top-n 5 --with-images --images_n 3
 """
 
 from __future__ import annotations
@@ -12,11 +11,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 # Defaults — change here to adjust script-wide defaults without CLI flags.
-DEFAULT_MAX_TOPICS = 100
-DEFAULT_BLUESKY_LIMIT = 500
+DEFAULT_MAX_TOPICS = 25
+DEFAULT_BLUESKY_LIMIT = 300
 DEFAULT_MASTODON_LIMIT = 100
 DEFAULT_TOP_N = 5
-TRACK_TOPICS_IMAGE_COUNT = 3
+DEFAULT_IMAGE_COUNT = 3
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
 _BACKEND = _REPO_ROOT / "backend"
@@ -264,8 +263,19 @@ def main() -> int:
         "--with-images",
         action="store_true",
         help=(
-            f"Fetch up to {TRACK_TOPICS_IMAGE_COUNT} image urls per topic via SerpAPI "
-            "and store on topics.image_url (extra API usage; omit flag to skip)."
+            "Fetch image urls per topic via SerpAPI and store on topics.image_url "
+            "(extra API usage; omit flag to skip). Count set by --image-n."
+        ),
+    )
+    parser.add_argument(
+        "--image-n",
+        "--image_n",
+        type=int,
+        default=DEFAULT_IMAGE_COUNT,
+        metavar="N",
+        help=(
+            f"With --with-images, max image urls per topic (default: {DEFAULT_IMAGE_COUNT}; "
+            "capped at 100 in the images API)."
         ),
     )
     args = parser.parse_args()
@@ -279,6 +289,9 @@ def main() -> int:
         return 1
     if args.top_n < 1:
         log.error("--top-n must be >= 1")
+        return 1
+    if args.image_n < 1:
+        log.error("--image-n must be >= 1")
         return 1
 
     raw = get_trending_now(max=args.max_topics)
@@ -321,7 +334,7 @@ def main() -> int:
 
         image_urls: list[str] | None = None
         if args.with_images:
-            img = get_topic_images(name, count=TRACK_TOPICS_IMAGE_COUNT)
+            img = get_topic_images(name, count=args.image_n)
             if isinstance(img, tuple) and img[0] is None:
                 log.warning(
                     "[%d/%d %d%%] get_topic_images %r failed: %s",
