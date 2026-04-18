@@ -71,6 +71,22 @@
   gap: var(--spacing-sm);
 }
 
+.subData {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1;
+  margin-top: 4px;
+}
+
+.subDataItem {
+  white-space: nowrap;
+}
+
 .cardHeader:hover {
   color: var(--color-text-primary);
   text-decoration: underline;

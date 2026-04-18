@@ -23,6 +23,14 @@ function sentimentPhrase(positive, neutral, negative) {
   return "Mostly negative";
 }
 
+function compactNumber(value) {
+  if (typeof value !== "number" || Number.isNaN(value)) return "N/A";
+  return new Intl.NumberFormat("en-US", {
+    notation: "compact",
+    maximumFractionDigits: 1,
+  }).format(value);
+}
+
 const Card = ({ card }) => {
   const titleForUrl = encodeURIComponent(card.title);
   const heading = card.displayTitle ?? card.title;
@@ -38,8 +46,18 @@ const Card = ({ card }) => {
   }, [card.image]);
 
   const onImageError = () => {
-    setImageSrc((prev) => (prev === topicPlaceholder ? prev : topicPlaceholder));
+    setImageSrc((prev) =>
+      prev === topicPlaceholder ? prev : topicPlaceholder,
+    );
   };
+  const increaseText =
+    typeof card.increase_pct === "number" && Number.isFinite(card.increase_pct)
+      ? `+${card.increase_pct}%`
+      : "—";
+  const searchesText =
+    typeof card.searches === "number" && Number.isFinite(card.searches)
+      ? `${compactNumber(card.searches)} searches`
+      : "—";
 
   return (
     <div className={styles.card}>
@@ -63,6 +81,10 @@ const Card = ({ card }) => {
           neutral={card.neutral_sentiment}
           positive={card.positive_sentiment}
         />
+        <div className={styles.subData}>
+          <span className={styles.subDataItem}>{searchesText}</span>
+          <span className={styles.subDataItem}>{increaseText}</span>
+        </div>
       </div>
     </div>
   );

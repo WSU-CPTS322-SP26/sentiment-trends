@@ -68,6 +68,8 @@ export function mapApiCardToDisplay(api) {
     displayTitle: toTitleCase(api.title),
     image: firstUrl ?? topicPlaceholder,
     category,
+    searches: api.searches,
+    increase_pct: api.increase_pct,
     positive_sentiment: (pos ?? 0) / 100,
     neutral_sentiment: (neu ?? 0) / 100,
     negative_sentiment: (neg ?? 0) / 100,
