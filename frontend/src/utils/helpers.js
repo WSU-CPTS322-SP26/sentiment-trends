@@ -2,7 +2,10 @@ import topicPlaceholder from "../assets/topic-placeholder.svg";
 
 export function toTitleCase(name) {
   if (!name || typeof name !== "string") return name;
-  return name.replace(/\w[\w'-]*/g, (w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
+  return name.replace(
+    /\w[\w'-]*/g,
+    (w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase(),
+  );
 }
 
 // all first, then only category labels that appear on at least one card
@@ -50,11 +53,7 @@ export function mapApiCardToDisplay(api) {
   const neu = api.neutral_pct;
   const neg = api.negative_pct;
   const rawCat = api.category;
-  const category = Array.isArray(rawCat)
-    ? rawCat
-    : rawCat
-      ? [rawCat]
-      : [];
+  const category = Array.isArray(rawCat) ? rawCat : rawCat ? [rawCat] : [];
   let firstUrl = null;
   for (const u of imageUrlList(api.image_url)) {
     if (typeof u === "string" && u.trim() !== "") {
