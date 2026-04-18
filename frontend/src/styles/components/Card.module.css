@@ -11,6 +11,25 @@
   flex-direction: column;
   min-width: 0;
   gap: var(--spacing-md);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
+  will-change: transform;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl);
+}
+
+.card:focus-within {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl);
+}
+
+.card:active {
+  transform: translateY(-1px);
 }
 
 .cardHeader {
