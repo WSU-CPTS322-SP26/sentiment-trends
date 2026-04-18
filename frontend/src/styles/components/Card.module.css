@@ -13,38 +13,43 @@
   gap: var(--spacing-md);
 }
 
-
 .cardHeader {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    align-items: center;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  min-width: 0;
 }
 
-.cardImage{
-    width: clamp(40px, 10%, 64px);
-    height: clamp(40px, 10%, 64px);
-    border-radius: 10%;
+.cardImage {
+  width: clamp(40px, 10%, 64px);
+  height: clamp(40px, 10%, 64px);
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  min-width: 0;
+  object-fit: cover;
+  border-radius: 10%;
 }
 
-.cardTitle{
+.cardTitle {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
   margin-left: var(--spacing-sm);
   color: var(--color-text-primary);
+  min-width: 0;
 }
 
-.cardDescription{
-    font-size: var(--font-size-md);
-    color: var(--color-text-primary);
+.cardDescription {
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
 }
 
 .cardBody {
-    font-weight: var(--font-weight-medium);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-sm);
+  font-weight: var(--font-weight-medium);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
 }
 
 .cardHeader:hover {

@@ -25,6 +25,26 @@ export function categoriesFromCards(cards) {
   return nav;
 }
 
+/** Coerce topics.image_url (text[] or occasional string) into a string list. */
+function imageUrlList(raw) {
+  if (Array.isArray(raw)) return raw;
+  if (raw == null) return [];
+  if (typeof raw === "string") {
+    const t = raw.trim();
+    if (!t) return [];
+    if (t.startsWith("[")) {
+      try {
+        const parsed = JSON.parse(t);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [t];
+      }
+    }
+    return [t];
+  }
+  return [];
+}
+
 export function mapApiCardToDisplay(api) {
   const pos = api.positive_pct;
   const neu = api.neutral_pct;
@@ -35,11 +55,18 @@ export function mapApiCardToDisplay(api) {
     : rawCat
       ? [rawCat]
       : [];
+  let firstUrl = null;
+  for (const u of imageUrlList(api.image_url)) {
+    if (typeof u === "string" && u.trim() !== "") {
+      firstUrl = u.trim();
+      break;
+    }
+  }
   return {
     id: api.id,
     title: api.title,
     displayTitle: toTitleCase(api.title),
-    image: topicPlaceholder,
+    image: firstUrl ?? topicPlaceholder,
     category,
     positive_sentiment: (pos ?? 0) / 100,
     neutral_sentiment: (neu ?? 0) / 100,

@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import topicPlaceholder from "../assets/topic-placeholder.svg";
 import styles from "../styles/components/Card.module.css";
 import Bar from "./Bar";
-import { Link } from "react-router-dom";
 
 // same rounded shares as the bar; ties → mixed
 function sentimentPhrase(positive, neutral, negative) {
@@ -30,10 +32,26 @@ const Card = ({ card }) => {
     card.negative_sentiment,
   );
 
+  const [imageSrc, setImageSrc] = useState(card.image);
+  useEffect(() => {
+    setImageSrc(card.image);
+  }, [card.image]);
+
+  const onImageError = () => {
+    setImageSrc((prev) => (prev === topicPlaceholder ? prev : topicPlaceholder));
+  };
+
   return (
     <div className={styles.card}>
       <Link to={`/topic/${titleForUrl}`} className={styles.cardHeader}>
-        <img className={styles.cardImage} src={card.image} alt={heading} />
+        <img
+          className={styles.cardImage}
+          src={imageSrc}
+          alt={heading}
+          referrerPolicy="no-referrer"
+          loading="lazy"
+          onError={onImageError}
+        />
         <h2 className={styles.cardTitle}>{heading}</h2>
       </Link>
       <div className={styles.cardBody}>

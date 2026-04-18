@@ -47,6 +47,10 @@ def test_get_homepage_topics_maps_rows():
                 "created_at": "2026-06-01T00:00:00Z",
             },
         ],
+        "image_url": [
+            "https://example.com/a.jpg",
+            "https://example.com/b.jpg",
+        ],
     }
     mock_execute = MagicMock()
     mock_execute.execute.return_value = MagicMock(data=[mock_row])
@@ -74,6 +78,10 @@ def test_get_homepage_topics_maps_rows():
     assert c["negative_pct"] == 70.0
     assert c["avg_compound"] == -0.42
     assert c["snapshot_at"] == "2026-06-01T00:00:00Z"
+    assert c["image_url"] == [
+        "https://example.com/a.jpg",
+        "https://example.com/b.jpg",
+    ]
 
 
 def test_get_homepage_topics_no_sentiment_rows():
@@ -102,3 +110,4 @@ def test_get_homepage_topics_no_sentiment_rows():
     assert c["negative_pct"] is None
     assert c["avg_compound"] is None
     assert c["snapshot_at"] is None
+    assert c["image_url"] is None
