@@ -1,5 +1,5 @@
 """
-python track_topics.py --max-topics 150 --bluesky-limit 1000 --mastodon-limit 100 --top-n 5
+python track_topics.py --max-topics 25 --bluesky-limit 250 --mastodon-limit 100 --top-n 5 --with-images --images_n 3
 """
 
 from __future__ import annotations
@@ -11,10 +11,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 # Defaults — change here to adjust script-wide defaults without CLI flags.
-DEFAULT_MAX_TOPICS = 100
-DEFAULT_BLUESKY_LIMIT = 500
+DEFAULT_MAX_TOPICS = 25
+DEFAULT_BLUESKY_LIMIT = 300
 DEFAULT_MASTODON_LIMIT = 100
 DEFAULT_TOP_N = 5
+DEFAULT_IMAGE_COUNT = 3
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
 _BACKEND = _REPO_ROOT / "backend"
@@ -30,6 +31,7 @@ except ImportError:
     pass  # optional dep; env may already be set
 
 import config  # noqa: E402 — after sys.path
+from apis.images import get_topic_images  # noqa: E402
 from apis.topics import get_trending_now  # noqa: E402
 from services.sentiment import analyze_topic  # noqa: E402
 from services.summary import summarize_topic
@@ -89,11 +91,12 @@ def _normalize_categories(raw: object) -> list[str] | None:
     return out or None
 
 
-def _upsert_topic_row(topic_row: dict) -> str:
+def _upsert_topic_row(topic_row: dict, *, image_urls: list[str] | None = None) -> str:
     """Upsert one trending topic into `topics` (by name) and return its id.
 
     Args:
         topic_row: dict with at least `query`; optional search_volume, increase_percentage, categories.
+        image_urls: when set and non-empty, stored as topics.image_url; omitted otherwise.
 
     Returns:
         Topic id as string (for foreign keys).
@@ -116,6 +119,8 @@ def _upsert_topic_row(topic_row: dict) -> str:
     cats = _normalize_categories(topic_row.get("categories"))
     if cats is not None:
         payload["category"] = cats
+    if image_urls:
+        payload["image_url"] = image_urls
 
     # postgrest-py 2.x usually returns the row (with id); if not, fetch by name
     res = config.supabase.table("topics").upsert(payload, on_conflict="name").execute()
@@ -254,6 +259,25 @@ def main() -> int:
         action="store_true",
         help="After ingest, remove stale rows so DB only contains this run's snapshot.",
     )
+    parser.add_argument(
+        "--with-images",
+        action="store_true",
+        help=(
+            "Fetch image urls per topic via SerpAPI and store on topics.image_url "
+            "(extra API usage; omit flag to skip). Count set by --image-n."
+        ),
+    )
+    parser.add_argument(
+        "--image-n",
+        "--image_n",
+        type=int,
+        default=DEFAULT_IMAGE_COUNT,
+        metavar="N",
+        help=(
+            f"With --with-images, max image urls per topic (default: {DEFAULT_IMAGE_COUNT}; "
+            "capped at 100 in the images API)."
+        ),
+    )
     args = parser.parse_args()
 
     # bail early on nonsense limits instead of hitting apis
@@ -265,6 +289,9 @@ def main() -> int:
         return 1
     if args.top_n < 1:
         log.error("--top-n must be >= 1")
+        return 1
+    if args.image_n < 1:
+        log.error("--image-n must be >= 1")
         return 1
 
     raw = get_trending_now(max=args.max_topics)
@@ -305,8 +332,24 @@ def main() -> int:
         pct_before = round(100 * (idx - 1) / total) if total else 0
         pct_after = round(100 * idx / total) if total else 0
 
+        image_urls: list[str] | None = None
+        if args.with_images:
+            img = get_topic_images(name, count=args.image_n)
+            if isinstance(img, tuple) and img[0] is None:
+                log.warning(
+                    "[%d/%d %d%%] get_topic_images %r failed: %s",
+                    idx,
+                    total,
+                    pct_before,
+                    name,
+                    img[1],
+                )
+            elif isinstance(img, dict):
+                urls = img.get("images") or []
+                image_urls = urls if urls else None
+
         try:
-            topic_id = _upsert_topic_row(topic_row)
+            topic_id = _upsert_topic_row(topic_row, image_urls=image_urls)
         except Exception as e:
             log.exception(
                 "[%d/%d %d%%] upsert topic %r failed: %s", idx, total, pct_before, name, e
