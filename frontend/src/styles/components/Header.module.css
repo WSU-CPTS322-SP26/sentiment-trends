@@ -1,6 +1,7 @@
 .header {
     position: sticky;
     top: 0;
+    z-index: var(--z-sticky);
     background-color: var(--color-background);
     border-bottom: 1px solid var(--color-secondary);
     color: var(--color-text-primary);
@@ -24,6 +25,17 @@
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-heavy);
   margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  color: inherit;
+}
+
+.headerLogo {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
 .headerSearch {

@@ -36,6 +36,7 @@ def _topic_to_card(row: dict) -> dict:
         "avg_compound": latest.get("avg_compound") if latest else None,
         "snapshot_at": latest.get("created_at") if latest else None,
         "summary": latest.get("summary") if latest else None,
+        "image_url": row.get("image_url"),
     }
 
 
@@ -53,7 +54,7 @@ def get_homepage_topics() -> list[dict]:
     res = (
         config.supabase.table("topics")
         .select(
-            "id, name, category, searches, increase_pct, "
+            "id, name, category, searches, increase_pct, image_url, "
             "daily_topic_sentiment(pos_pct, neu_pct, neg_pct, avg_compound, created_at)"
         )
         .order("searches", desc=True)
