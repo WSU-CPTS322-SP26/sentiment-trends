@@ -6,7 +6,7 @@
   text-align: left;
   width: 100%;
   max-width: none;
-  min-height: 500px;
+  min-height: 220px;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -50,8 +50,8 @@
 }
 
 .cardTitle {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-medium);
+  font-size: 18px;
+  font-weight: var(--font-weight-heavy);
   margin-left: var(--spacing-sm);
   color: var(--color-text-primary);
   min-width: 0;

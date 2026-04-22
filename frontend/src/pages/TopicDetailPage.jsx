@@ -9,6 +9,7 @@ import { LuChartBar } from "react-icons/lu";
 import TopicDetailPageSkeleton from "../components/TopicDetailPageSkeleton";
 import { toTitleCase } from "../utils/helpers";
 import { useHomepageCards } from "../utils/HomepageCardsContext";
+import { overallToneLabel } from "../utils/sentimentTone";
 
 const TopicDetailPage = () => {
   const { topic: topicParam } = useParams();
@@ -152,12 +153,13 @@ const TopicDetailPage = () => {
   const negative = data?.topic?.negative_pct;
   const posts = data?.posts ?? [];
   const snapshotAt = data?.topic?.snapshot_at;
+  const overallTone = overallToneLabel(compound, positive, negative);
 
   function sentimentColor(value) {
     if (value == null || Number.isNaN(value)) return "text-neutral-400";
+    if (value > -0.05 && value < 0.05) return "text-neutral-700";
     if (value < 0) return "text-red-600";
-    if (value > 0) return "text-green-600";
-    return "text-neutral-900";
+    return "text-green-600";
   }
 
   return (
@@ -171,9 +173,9 @@ const TopicDetailPage = () => {
       <div className={`${styles.pageContainer} min-h-screen bg-zinc-50`}>
         <div className={`${styles.content} py-4`}>
           <div
-            className={`${styles.panel} space-y-4 border-2 border-neutral-200`}
+            className={`${styles.panel} space-y-3 border-2 border-neutral-200`}
           >
-            <h1 className="text-3xl font-bold text-neutral-900">
+            <h1 className="text-3xl font-bold text-neutral-900 leading-tight">
               Sentiment Analysis: {toTitleCase(displayTitle)}
             </h1>
             {data.source === "live" && (
@@ -183,47 +185,31 @@ const TopicDetailPage = () => {
               </p>
             )}
             {data.source === "db" && snapshotAt && (
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-neutral-500 leading-tight -mt-1">
                 {new Date(snapshotAt).toLocaleString()}
               </p>
             )}
 
-            <div className="rounded-2xl border-2 border-neutral-200 bg-score-tint px-6 py-5 shadow-sm">
-              <p className="text-sm font-bold text-neutral-500">
-                Compound sentiment score
+            <div className="rounded-2xl border-2 border-neutral-200 bg-score-tint px-4 py-3 shadow-sm">
+              <p className="text-sm font-bold text-neutral-500 leading-tight">
+                Overall tone
               </p>
               <p
-                className={`mt-1 text-4xl font-semibold tabular-nums ${sentimentColor(compound)}`}
+                className={`mt-0.5 text-3xl font-semibold leading-tight ${sentimentColor(compound)}`}
               >
-                {compound != null ? compound.toFixed(3) : "—"}
+                {overallTone ?? "—"}
               </p>
-              <p className="mt-2 text-xs font-bold text-neutral-500">
-                Range: -1.0 (most negative) to +1.0 (most positive)
-              </p>
+              {compound != null && (
+                <p className="mt-1.5 text-xs text-neutral-500 leading-snug">
+                  Based on a compound score of{" "}
+                  <span className="font-medium tabular-nums text-neutral-600">
+                    {compound.toFixed(3)}
+                  </span>{" "}
+                  (from -1, most negative, to +1, most positive).
+                </p>
+              )}
             </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border-2 border-green-300 bg-green-100 px-4 py-4 shadow-sm">
-                <p className="text-sm font-bold text-green-600">Positive</p>
-                <p className="mt-1 text-3xl font-semibold tabular-nums text-green-600">
-                  {positive != null ? `${Number(positive).toFixed(0)}%` : "—"}
-                </p>
-              </div>
-
-              <div className="rounded-2xl border-2 border-neutral-300 bg-neutral-100 px-4 py-4 shadow-sm">
-                <p className="text-sm font-bold text-neutral-900">Neutral</p>
-                <p className="mt-1 text-3xl font-semibold tabular-nums text-neutral-900">
-                  {neutral != null ? `${Number(neutral).toFixed(0)}%` : "—"}
-                </p>
-              </div>
-
-              <div className="rounded-2xl border-2 border-red-300 bg-red-100 px-4 py-4 shadow-sm">
-                <p className="text-sm font-bold text-red-600">Negative</p>
-                <p className="mt-1 text-3xl font-semibold tabular-nums text-red-600">
-                  {negative != null ? `${Number(negative).toFixed(0)}%` : "—"}
-                </p>
-              </div>
-            </div>
             <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
               <div className="flex items-center gap-2 mb-3">
                 <LuChartBar className="size-4 text-gray-600" />

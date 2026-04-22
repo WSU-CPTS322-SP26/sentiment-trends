@@ -61,6 +61,14 @@ export function mapApiCardToDisplay(api) {
       break;
     }
   }
+  const compoundRaw = api.avg_compound;
+  const avgCompound =
+    compoundRaw != null &&
+    compoundRaw !== "" &&
+    !Number.isNaN(Number(compoundRaw))
+      ? Number(compoundRaw)
+      : null;
+
   return {
     id: api.id,
     title: api.title,
@@ -69,6 +77,7 @@ export function mapApiCardToDisplay(api) {
     category,
     searches: api.searches,
     increase_pct: api.increase_pct,
+    avg_compound: avgCompound,
     positive_sentiment: (pos ?? 0) / 100,
     neutral_sentiment: (neu ?? 0) / 100,
     negative_sentiment: (neg ?? 0) / 100,
