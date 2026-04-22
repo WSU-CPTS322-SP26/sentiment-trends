@@ -24,3 +24,32 @@
   min-width: 0;
   width: 100%;
 }
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-md);
+}
+
+.pageButton {
+  border: 1px solid var(--color-secondary);
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+}
+
+.pageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.activePage {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+}

@@ -6,7 +6,7 @@
   text-align: left;
   width: 100%;
   max-width: none;
-  min-height: 180px;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -40,8 +40,8 @@
 }
 
 .cardImage {
-  width: clamp(40px, 10%, 64px);
-  height: clamp(40px, 10%, 64px);
+  width: clamp(48px, 12%, 72px);
+  height: clamp(48px, 12%, 72px);
   aspect-ratio: 1;
   flex-shrink: 0;
   min-width: 0;
