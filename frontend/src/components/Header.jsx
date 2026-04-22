@@ -5,6 +5,7 @@ import { SearchResultsList } from "../components/SearchResultsList";
 import Categories from "../components/Categories";
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import logo from "../assets/logo.png";
 
 const Header = ({ title, onSearch, results, categories }) => {
   const searchRef = useRef(null);
@@ -24,7 +25,7 @@ const Header = ({ title, onSearch, results, categories }) => {
           <Link to="/" className={styles.headerTitle}>
             <img
               className={styles.headerLogo}
-              src="/favicon-32x32.png"
+              src={logo}
               alt=""
               aria-hidden="true"
             />
