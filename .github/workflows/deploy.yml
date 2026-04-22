@@ -1,0 +1,25 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTH_KEY }}
+
+      - name: Deploy to BACKEND HOST
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 100.110.59.39
+          username: troymuehlbauer
+          key: ${{ secrets.BACKEND_HOST_SSH_KEY }}
+          script: |
+            cd ~/sentiment-trends
+            git pull
+            
