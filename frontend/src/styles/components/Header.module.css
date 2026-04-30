@@ -49,7 +49,7 @@
   margin-left: auto;
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
 }
 .aboutButton {
   display: inline-block;
