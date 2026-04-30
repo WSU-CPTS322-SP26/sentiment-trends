@@ -179,7 +179,7 @@ const TopicDetailPage = ({ theme, onToggleTheme }) => {
               Sentiment Analysis: {toTitleCase(displayTitle)}
             </h1>
             {data.source === "live" && (
-              <p className="text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+              <p className="text-sm text-[var(--color-notice-text)] bg-[var(--color-notice-bg)] border border-[var(--color-notice-border)] rounded-lg px-3 py-2">
                 Live analysis: results are fetched on demand and not from the
                 database
               </p>
