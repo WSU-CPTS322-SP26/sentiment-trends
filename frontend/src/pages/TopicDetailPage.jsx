@@ -11,7 +11,7 @@ import { toTitleCase } from "../utils/helpers";
 import { useHomepageCards } from "../utils/HomepageCardsContext";
 import { overallToneLabel } from "../utils/sentimentTone";
 
-const TopicDetailPage = () => {
+const TopicDetailPage = ({ theme, onToggleTheme }) => {
   const { topic: topicParam } = useParams();
   const { navbarCategories } = useHomepageCards();
   const [data, setData] = useState(null);
@@ -98,13 +98,13 @@ const TopicDetailPage = () => {
           onSearch={setResults}
           results={results}
           categories={navbarCategories}
+          theme={theme}
+          onToggleTheme={onToggleTheme}
         />
-        <div className={`${styles.pageContainer} min-h-screen bg-zinc-50`}>
+        <div className={`${styles.pageContainer} min-h-screen`}>
           <div className={`${styles.content} py-4`}>
-            <div
-              className={`${styles.panel} space-y-4 border-2 border-neutral-200`}
-            >
-              <h1 className="text-3xl font-bold text-neutral-900">
+            <div className={`${styles.panel} ${styles.sectionCard} space-y-4`}>
+              <h1 className="text-3xl font-bold text-[var(--color-text-primary)]">
                 Sentiment Analysis: {toTitleCase(topicSlug)}
               </h1>
               <TopicDetailPageSkeleton />
@@ -123,13 +123,13 @@ const TopicDetailPage = () => {
           onSearch={setResults}
           results={results}
           categories={navbarCategories}
+          theme={theme}
+          onToggleTheme={onToggleTheme}
         />
-        <div className={`${styles.pageContainer} min-h-screen bg-zinc-50`}>
+        <div className={`${styles.pageContainer} min-h-screen`}>
           <div className={`${styles.content} py-4`}>
-            <div
-              className={`${styles.panel} space-y-4 border-2 border-neutral-200`}
-            >
-              <h1 className="text-3xl font-bold text-neutral-900">
+            <div className={`${styles.panel} ${styles.sectionCard} space-y-4`}>
+              <h1 className="text-3xl font-bold text-[var(--color-text-primary)]">
                 Sentiment Analysis: {toTitleCase(topicSlug)}
               </h1>
               <p className="text-red-600" role="alert">
@@ -169,13 +169,13 @@ const TopicDetailPage = () => {
         onSearch={setResults}
         results={results}
         categories={navbarCategories}
+        theme={theme}
+        onToggleTheme={onToggleTheme}
       />
-      <div className={`${styles.pageContainer} min-h-screen bg-zinc-50`}>
+      <div className={`${styles.pageContainer} min-h-screen`}>
         <div className={`${styles.content} py-4`}>
-          <div
-            className={`${styles.panel} space-y-3 border-2 border-neutral-200`}
-          >
-            <h1 className="text-3xl font-bold text-neutral-900 leading-tight">
+          <div className={`${styles.panel} ${styles.sectionCard} space-y-3`}>
+            <h1 className="text-3xl font-bold text-[var(--color-text-primary)] leading-tight">
               Sentiment Analysis: {toTitleCase(displayTitle)}
             </h1>
             {data.source === "live" && (
@@ -185,13 +185,13 @@ const TopicDetailPage = () => {
               </p>
             )}
             {data.source === "db" && snapshotAt && (
-              <p className="text-sm text-neutral-500 leading-tight -mt-1">
+              <p className="text-sm text-[var(--color-text-secondary)] leading-tight -mt-1">
                 {new Date(snapshotAt).toLocaleString()}
               </p>
             )}
 
-            <div className="rounded-2xl border-2 border-neutral-200 bg-score-tint px-4 py-3 shadow-sm">
-              <p className="text-sm font-bold text-neutral-500 leading-tight">
+            <div className="rounded-2xl border-2 border-[var(--color-border-muted)] bg-[var(--color-score-tint)] px-4 py-3 shadow-sm">
+              <p className="text-sm font-bold text-[var(--color-text-secondary)] leading-tight">
                 Overall tone
               </p>
               <p
@@ -200,9 +200,9 @@ const TopicDetailPage = () => {
                 {overallTone ?? "—"}
               </p>
               {compound != null && (
-                <p className="mt-1.5 text-xs text-neutral-500 leading-snug">
+                <p className="mt-1.5 text-xs text-[var(--color-text-secondary)] leading-snug">
                   Based on a compound score of{" "}
-                  <span className="font-medium tabular-nums text-neutral-600">
+                  <span className="font-medium tabular-nums text-[var(--color-text-primary)]">
                     {compound.toFixed(3)}
                   </span>{" "}
                   (from -1, most negative, to +1, most positive).
@@ -210,10 +210,10 @@ const TopicDetailPage = () => {
               )}
             </div>
 
-            <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+            <div className="rounded-xl p-4 border border-[var(--color-border-muted)] bg-[var(--color-elevated-2)]">
               <div className="flex items-center gap-2 mb-3">
-                <LuChartBar className="size-4 text-gray-600" />
-                <span className="text-sm font-medium text-gray-700">
+                <LuChartBar className="size-4 text-[var(--color-text-secondary)]" />
+                <span className="text-sm font-medium text-[var(--color-text-secondary)]">
                   Overall Sentiment Distribution
                 </span>
               </div>
@@ -224,23 +224,23 @@ const TopicDetailPage = () => {
               />
             </div>
             
-            <div className="rounded-2xl border-2 border-neutral-200 bg-white px-6 py-5 shadow-sm space-y-3">
-              <h2 className="text-lg font-semibold text-neutral-900">Topic Summary</h2>
+            <div className="rounded-2xl border-2 border-[var(--color-border-muted)] bg-[var(--color-elevated)] px-6 py-5 shadow-sm space-y-3">
+              <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">Topic Summary</h2>
 
               {summary ? (
-                <p className="text-sm leading-relaxed text-neutral-700 whitespace-pre-wrap">
+                <p className="text-sm leading-relaxed text-[var(--color-text-secondary)] whitespace-pre-wrap">
                   {summary}
                 </p>
               ) : (
                 <>
-                  <p className="text-sm text-neutral-500">
+                  <p className="text-sm text-[var(--color-text-secondary)]">
                     No stored summary available for this topic yet.
                   </p>
                   <button
                     type="button"
                     onClick={handleGenerateSummary}
                     disabled={summaryLoading}
-                    className="inline-flex items-center rounded-lg border border-neutral-300 px-3 py-2 text-sm font-medium text-neutral-800 hover:bg-neutral-100 disabled:opacity-60"
+                    className="inline-flex items-center rounded-lg border border-[var(--color-border-muted)] px-3 py-2 text-sm font-medium text-[var(--color-text-primary)] hover:bg-[var(--color-elevated-2)] disabled:opacity-60"
                   >
                     {summaryLoading ? "Generating..." : "Generate Summary"}
                   </button>
@@ -254,11 +254,11 @@ const TopicDetailPage = () => {
             </div>
 
             <div className="space-y-4">
-              <h2 className="text-base font-semibold text-neutral-800">
+              <h2 className="text-base font-semibold text-[var(--color-text-primary)]">
                 Top posts ({posts.length})
               </h2>
               {posts.length === 0 ? (
-                <p className="text-sm text-neutral-500">
+                <p className="text-sm text-[var(--color-text-secondary)]">
                   {data.source === "db"
                     ? "No top posts stored for this topic yet."
                     : "No posts matched this search."}
@@ -267,21 +267,21 @@ const TopicDetailPage = () => {
                 posts.map((post, index) => (
                   <div
                     key={post.id != null ? String(post.id) : `post-${index}`}
-                    className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm"
+                    className="rounded-xl border border-[var(--color-border-muted)] bg-[var(--color-elevated)] p-4 shadow-sm"
                   >
-                    <p className="text-lg font-bold text-neutral-900">
+                    <p className="text-lg font-bold text-[var(--color-text-primary)]">
                       Post {index + 1}
-                      <span className="ml-2 text-base font-normal text-neutral-500">
+                      <span className="ml-2 text-base font-normal text-[var(--color-text-secondary)]">
                         · {post.platform ?? "unknown"}
                       </span>
                     </p>
-                    <p className="mt-2 text-sm font-medium text-neutral-800">
+                    <p className="mt-2 text-sm font-medium text-[var(--color-text-primary)]">
                       @{post.author ?? "unknown"}
                     </p>
-                    <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-neutral-700">
+                    <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-secondary)]">
                       {post.text}
                     </p>
-                    <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-neutral-500">
+                    <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-[var(--color-text-secondary)]">
                       <span
                         className={`rounded-full px-2 py-0.5 font-medium capitalize ${
                           post.label === "positive"

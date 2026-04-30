@@ -44,21 +44,45 @@
     max-width: 600px;
 }
 
-.headerAbout {
-    flex: 0 0 auto;
-    margin-left: auto;
+.headerActions {
+  flex: 0 0 auto;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
 }
 .aboutButton {
-    display: inline-block;
-    padding: 7px 20px;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-white);
-    text-decoration: none;
-    border-radius: 8px;
-    background-color: var(--color-primary);
-    transition: background-color 0.15s ease
+  display: inline-block;
+  padding: 7px 20px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-white);
+  text-decoration: none;
+  border-radius: 8px;
+  background-color: var(--color-primary);
+  transition: background-color 0.15s ease;
 }
 .aboutButton:hover {
-    background-color: var(--color-primary-hover);
+  background-color: var(--color-primary-hover);
+}
+
+.themeToggle {
+  border: 1px solid var(--color-secondary);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+
+.themeToggle:hover {
+  background-color: var(--color-surface);
+}
+
+.themeToggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }

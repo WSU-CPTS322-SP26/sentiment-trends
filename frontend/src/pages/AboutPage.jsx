@@ -6,7 +6,7 @@ import { appConfig } from "../constants";
 import { useHomepageCards } from "../utils/HomepageCardsContext";
 import { FaGithub } from "react-icons/fa";
 
-const AboutPage = () => {
+const AboutPage = ({ theme, onToggleTheme }) => {
   const [results, setResults] = useState([]);
   const { navbarCategories } = useHomepageCards();
 
@@ -17,6 +17,8 @@ const AboutPage = () => {
         onSearch={setResults}
         results={results}
         categories={navbarCategories}
+        theme={theme}
+        onToggleTheme={onToggleTheme}
       />
       <div className={`${topicStyles.pageContainer} min-h-screen bg-zinc-50`}>
         <div className={`${topicStyles.content} py-4`}>

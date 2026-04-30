@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import logo from "../assets/logo.png";
 
-const Header = ({ title, onSearch, results, categories }) => {
+const Header = ({ title, onSearch, results, categories, theme, onToggleTheme }) => {
   const searchRef = useRef(null);
   useEffect(() => {
     const close = (e) => {
@@ -36,10 +36,19 @@ const Header = ({ title, onSearch, results, categories }) => {
           <SearchBar setResults={onSearch} />
           {results?.length > 0 && <SearchResultsList results={results} />}
         </div>
-        <div className={styles.headerAbout}>
+        <div className={styles.headerActions}>
           <Link to="/about" className={styles.aboutButton}>
             About
           </Link>
+          <button
+            type="button"
+            className={styles.themeToggle}
+            onClick={onToggleTheme}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            aria-pressed={theme === "dark"}
+          >
+            {theme === "dark" ? "Light" : "Dark"}
+          </button>
         </div>
       </div>
       <Categories categories={categories} />
