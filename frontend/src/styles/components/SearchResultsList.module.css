@@ -3,11 +3,11 @@
     left: 0;
     right: 0;
     width: 100%;
-    background-color: var(--color-background);
-    border: 1px solid var(--color-secondary);
+    background-color: var(--color-elevated);
+    border: 1px solid var(--color-border-muted);
     display: flex;
     flex-direction: column;
-    box-shadow: var(--shadow-xxl) #ddd;
+    box-shadow: var(--shadow-lg);
     border-radius: var(--border-radius-lg);
     margin-top: var(--spacing-xs);
     max-height: 300px;
