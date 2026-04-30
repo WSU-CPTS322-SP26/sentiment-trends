@@ -7,14 +7,15 @@ import { HomepageCardsProvider } from "./utils/HomepageCardsContext";
 import AboutPage from "./pages/AboutPage";
 
 function App() {
-  const [theme, setTheme] = useState("light");
-
-  useEffect(() => {
+  const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "light" || savedTheme === "dark") {
-      setTheme(savedTheme);
+      return savedTheme;
     }
-  }, []);
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
