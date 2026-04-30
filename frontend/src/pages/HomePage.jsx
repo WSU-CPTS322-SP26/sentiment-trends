@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router-dom";
 import CardGridSkeleton from "../components/CardGridSkeleton";
 import { useHomepageCards } from "../utils/HomepageCardsContext";
 
-const HomePage = () => {
+const HomePage = ({ theme, onToggleTheme }) => {
   const PAGE_SIZE = 28;
   const [searchParams] = useSearchParams();
   const catParam = searchParams.get("category");
@@ -44,6 +44,8 @@ const HomePage = () => {
         onSearch={setResults}
         results={results}
         categories={navbarCategories}
+        theme={theme}
+        onToggleTheme={onToggleTheme}
       />
       <div className={styles.pageContainer}>
         {loading && <CardGridSkeleton />}

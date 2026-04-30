@@ -17,16 +17,20 @@
     max-width: 1800px;
     margin: 0 auto;
     padding: var(--spacing-sm) var(--layout-inline-padding);
-    background-color: var(--color-surface);
+    background-color: var(--color-background);
     min-height: 0;
 }
 
 .panel {
   width: 100%;
   border-radius: var(--border-radius-xl);
-  background-color: var(--color-white);
+  background-color: var(--color-elevated);
   box-shadow: var(--shadow-lg);
   padding: var(--spacing-xl) var(--spacing-card-padding);
   min-height: min(72vh, 52rem);
   box-sizing: border-box;
+}
+
+.sectionCard {
+  border: 2px solid var(--color-border-muted);
 }

@@ -5,10 +5,13 @@ import { SearchResultsList } from "../components/SearchResultsList";
 import Categories from "../components/Categories";
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import logo from "../assets/logo.png";
+import { LuMoon, LuSun } from "react-icons/lu";
+import lightModeLogo from "../assets/light_mode_logo.png";
+import darkModeLogo from "../assets/dark_mode_logo.png";
 
-const Header = ({ title, onSearch, results, categories }) => {
+const Header = ({ title, onSearch, results, categories, theme, onToggleTheme }) => {
   const searchRef = useRef(null);
+  const logoSrc = theme === "dark" ? darkModeLogo : lightModeLogo;
   useEffect(() => {
     const close = (e) => {
       if (searchRef.current && !searchRef.current.contains(e.target)) {
@@ -25,7 +28,7 @@ const Header = ({ title, onSearch, results, categories }) => {
           <Link to="/" className={styles.headerTitle}>
             <img
               className={styles.headerLogo}
-              src={logo}
+              src={logoSrc}
               alt=""
               aria-hidden="true"
             />
@@ -36,7 +39,16 @@ const Header = ({ title, onSearch, results, categories }) => {
           <SearchBar setResults={onSearch} />
           {results?.length > 0 && <SearchResultsList results={results} />}
         </div>
-        <div className={styles.headerAbout}>
+        <div className={styles.headerActions}>
+          <button
+            type="button"
+            className={styles.themeToggle}
+            onClick={onToggleTheme}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            aria-pressed={theme === "dark"}
+          >
+            {theme === "dark" ? <LuSun aria-hidden="true" /> : <LuMoon aria-hidden="true" />}
+          </button>
           <Link to="/about" className={styles.aboutButton}>
             About
           </Link>

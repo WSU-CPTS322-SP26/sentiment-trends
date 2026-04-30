@@ -1,20 +1,20 @@
 .header {
-    position: sticky;
-    top: 0;
-    z-index: var(--z-sticky);
-    background-color: var(--color-background);
-    border-bottom: 1px solid var(--color-secondary);
-    color: var(--color-text-primary);
-    /* Match main .pageContainer horizontal padding so 1300px rows line up */
-    padding: var(--spacing-xs) var(--layout-inline-padding);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-secondary);
+  color: var(--color-text-primary);
+  /* Match main .pageContainer horizontal padding so 1300px rows line up */
+  padding: 18px var(--layout-inline-padding) 0px;
 }
 
 .headerContainer {
-    max-width: 1300px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-lg);
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
 }
 
 .headerTitleContainer {
@@ -39,26 +39,54 @@
 }
 
 .headerSearch {
-    position: relative;
-    flex: auto;
-    max-width: 600px;
+  position: relative;
+  flex: auto;
+  max-width: 600px;
 }
 
-.headerAbout {
-    flex: 0 0 auto;
-    margin-left: auto;
+.headerActions {
+  flex: 0 0 auto;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-md);
 }
 .aboutButton {
-    display: inline-block;
-    padding: 7px 20px;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-white);
-    text-decoration: none;
-    border-radius: 8px;
-    background-color: var(--color-primary);
-    transition: background-color 0.15s ease
+  display: inline-block;
+  padding: 7px 20px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-white);
+  text-decoration: none;
+  border-radius: 8px;
+  background-color: var(--color-primary);
+  transition: background-color 0.15s ease;
 }
 .aboutButton:hover {
-    background-color: var(--color-primary-hover);
+  background-color: var(--color-primary-hover);
+}
+
+.themeToggle {
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-radius: 0;
+  padding: 0;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: none;
+  outline: none;
+  transition: color 0.15s ease;
+}
+
+.themeToggle:hover {
+  color: var(--color-text-primary);
+}
+
+.themeToggle:focus-visible {
+  outline: none;
 }
