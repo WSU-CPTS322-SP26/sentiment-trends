@@ -37,6 +37,8 @@
   --color-elevated-2: #f7f9fc;
   --color-score-tint: #eef5fe;
   --color-border-muted: #d9dde5;
+  --color-skeleton-base: #e5e7eb;
+  --color-skeleton-strong: #d1d5db;
 
   /* Text Colors */
   --color-text-primary: #000000;
@@ -135,6 +137,8 @@
   --color-elevated-2: #1d2531;
   --color-score-tint: #202a39;
   --color-border-muted: #2e3949;
+  --color-skeleton-base: #2a3442;
+  --color-skeleton-strong: #354256;
 
   --color-text-primary: #f2f5fa;
   --color-text-secondary: #c4cad6;
