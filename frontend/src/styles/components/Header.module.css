@@ -1,20 +1,20 @@
 .header {
-    position: sticky;
-    top: 0;
-    z-index: var(--z-sticky);
-    background-color: var(--color-background);
-    border-bottom: 1px solid var(--color-secondary);
-    color: var(--color-text-primary);
-    /* Match main .pageContainer horizontal padding so 1300px rows line up */
-    padding: var(--spacing-xs) var(--layout-inline-padding);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-secondary);
+  color: var(--color-text-primary);
+  /* Match main .pageContainer horizontal padding so 1300px rows line up */
+  padding: 18px var(--layout-inline-padding);
 }
 
 .headerContainer {
-    max-width: 1300px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-lg);
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
 }
 
 .headerTitleContainer {
@@ -39,9 +39,9 @@
 }
 
 .headerSearch {
-    position: relative;
-    flex: auto;
-    max-width: 600px;
+  position: relative;
+  flex: auto;
+  max-width: 600px;
 }
 
 .headerActions {
