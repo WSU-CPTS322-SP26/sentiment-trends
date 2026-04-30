@@ -49,7 +49,7 @@
   margin-left: auto;
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
 }
 .aboutButton {
   display: inline-block;
@@ -67,22 +67,26 @@
 }
 
 .themeToggle {
-  border: 1px solid var(--color-secondary);
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
-  border-radius: 8px;
-  padding: 7px 14px;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-radius: 0;
+  padding: 0;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
   cursor: pointer;
-  transition: var(--transition-colors);
+  box-shadow: none;
+  outline: none;
+  transition: color 0.15s ease;
 }
 
 .themeToggle:hover {
-  background-color: var(--color-surface);
+  color: var(--color-text-primary);
 }
 
 .themeToggle:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  outline: none;
 }
