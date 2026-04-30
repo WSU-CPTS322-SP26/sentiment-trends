@@ -5,10 +5,12 @@ import { SearchResultsList } from "../components/SearchResultsList";
 import Categories from "../components/Categories";
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import logo from "../assets/logo.png";
+import lightModeLogo from "../assets/light_mode_logo.png";
+import darkModeLogo from "../assets/dark_mode_logo.png";
 
 const Header = ({ title, onSearch, results, categories, theme, onToggleTheme }) => {
   const searchRef = useRef(null);
+  const logoSrc = theme === "dark" ? darkModeLogo : lightModeLogo;
   useEffect(() => {
     const close = (e) => {
       if (searchRef.current && !searchRef.current.contains(e.target)) {
@@ -25,7 +27,7 @@ const Header = ({ title, onSearch, results, categories, theme, onToggleTheme }) 
           <Link to="/" className={styles.headerTitle}>
             <img
               className={styles.headerLogo}
-              src={logo}
+              src={logoSrc}
               alt=""
               aria-hidden="true"
             />
