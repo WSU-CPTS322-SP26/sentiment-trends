@@ -34,3 +34,9 @@
 .sectionCard {
   border: 2px solid var(--color-border-muted);
 }
+
+@media (max-width: 600px) {
+  .panel {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+}

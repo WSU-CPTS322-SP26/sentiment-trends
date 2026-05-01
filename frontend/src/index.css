@@ -174,3 +174,16 @@ html, body {
 html {
   scrollbar-gutter: stable;
 }
+
+/* Prevent stray horizontal overflow from forcing iOS Safari to render
+   the page zoomed-out on first paint. */
+html, body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  html {
+    scrollbar-gutter: auto;
+  }
+}
