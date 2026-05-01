@@ -90,3 +90,49 @@
 .themeToggle:focus-visible {
   outline: none;
 }
+
+/* Mobile (iPhone-class viewports): keep logo + title + actions on the
+   first row, drop the search bar onto a full-width second row. */
+@media (max-width: 600px) {
+  .header {
+    padding-top: 12px;
+  }
+
+  .headerContainer {
+    flex-wrap: wrap;
+    row-gap: var(--spacing-sm);
+    column-gap: var(--spacing-sm);
+  }
+
+  .headerTitleContainer {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .headerTitle {
+    font-size: var(--font-size-xl);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  .headerSearch {
+    order: 1;
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .headerActions {
+    gap: var(--spacing-sm);
+  }
+
+  .aboutButton {
+    padding: 6px 12px;
+    font-size: var(--font-size-md);
+  }
+
+  .themeToggle {
+    font-size: 20px;
+  }
+}
