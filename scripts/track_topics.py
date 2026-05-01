@@ -16,6 +16,7 @@ DEFAULT_BLUESKY_LIMIT = 300
 DEFAULT_MASTODON_LIMIT = 100
 DEFAULT_TOP_N = 5
 DEFAULT_IMAGE_COUNT = 3
+DEFAULT_TRENDS_GEO = "US"
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
 _BACKEND = _REPO_ROOT / "backend"
@@ -32,6 +33,7 @@ except ImportError:
 
 import config  # noqa: E402 — after sys.path
 from apis.images import get_topic_images  # noqa: E402
+from apis.trends import get_interest_over_time  # noqa: E402
 from apis.topics import get_trending_now  # noqa: E402
 from services.sentiment import analyze_topic  # noqa: E402
 from services.summary import summarize_topic
@@ -206,7 +208,40 @@ def _replace_top_posts(topic_id: str, posts: list[dict]) -> None:
             }
         )
     config.supabase.table("top_posts").insert(rows).execute()
-    
+
+
+def _replace_interest_over_time(
+    topic_id: str,
+    geo: str,
+    timeline: list[dict],
+    *,
+    fetched_at: str,
+) -> None:
+    """Replace `topic_interest_over_time` for a topic+geo: delete existing rows, then insert `timeline`.
+
+    Each timeline item expects ``bucket_ts``, ``value``, optional ``bucket_label``, ``query``.
+    """
+    config.supabase.table("topic_interest_over_time").delete().eq("topic_id", topic_id).eq(
+        "geo", geo
+    ).execute()
+    if not timeline:
+        return
+    rows = []
+    for item in timeline:
+        rows.append(
+            {
+                "topic_id": topic_id,
+                "geo": geo,
+                "bucket_ts": item["bucket_ts"],
+                "bucket_label": item.get("bucket_label"),
+                "value": int(item["value"]),
+                "query": (item.get("query") or "").strip() or "",
+                "fetched_at": fetched_at,
+            }
+        )
+    config.supabase.table("topic_interest_over_time").insert(rows).execute()
+
+
 def _prune_to_current_snapshot(*, run_at: str, current_topic_names: set[str]) -> None:
     # Keep only this run's snapshot rows
     config.supabase.table("daily_topic_sentiment").delete().neq("created_at", run_at).execute()
@@ -220,6 +255,7 @@ def _prune_to_current_snapshot(*, run_at: str, current_topic_names: set[str]) ->
         tid = str(r["id"])
         config.supabase.table("top_posts").delete().eq("topic_id", tid).execute()
         config.supabase.table("daily_topic_sentiment").delete().eq("topic_id", tid).execute()
+        config.supabase.table("topic_interest_over_time").delete().eq("topic_id", tid).execute()
         config.supabase.table("topics").delete().eq("id", tid).execute()
 
 def main() -> int:
@@ -277,6 +313,11 @@ def main() -> int:
             f"With --with-images, max image urls per topic (default: {DEFAULT_IMAGE_COUNT}; "
             "capped at 100 in the images API)."
         ),
+    )
+    parser.add_argument(
+        "--skip-trends",
+        action="store_true",
+        help="Skip fetching Google Trends interest-over-time data (no SerpAPI calls for that engine).",
     )
     args = parser.parse_args()
 
@@ -357,6 +398,35 @@ def main() -> int:
             continue
 
         current_topic_names.add(name)
+
+        if not args.skip_trends:
+            trends = get_interest_over_time(name, geo=DEFAULT_TRENDS_GEO)
+            if isinstance(trends, tuple) and trends[0] is None:
+                log.warning(
+                    "[%d/%d %d%%] interest_over_time for %r failed: %s",
+                    idx,
+                    total,
+                    pct_before,
+                    name,
+                    trends[1],
+                )
+            elif isinstance(trends, dict):
+                try:
+                    _replace_interest_over_time(
+                        topic_id,
+                        DEFAULT_TRENDS_GEO,
+                        trends.get("timeline") or [],
+                        fetched_at=run_at,
+                    )
+                except Exception as e:
+                    log.exception(
+                        "[%d/%d %d%%] topic_interest_over_time replace for %r failed: %s",
+                        idx,
+                        total,
+                        pct_before,
+                        name,
+                        e,
+                    )
 
         log.info(
             "[%d/%d %d%%] fetching posts + sentiment for %r",
