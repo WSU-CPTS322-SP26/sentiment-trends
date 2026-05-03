@@ -127,13 +127,28 @@ def get_top_bigram_topics(posts, top_n=8, min_count=2):
 
 
 def get_search_topics(posts, single_top_n=5, bigram_top_n=5):
+    BLACKLIST = {
+        "https", "http", "www", "com", "net", "org",
+        "cnn", "bbc", "nytimes", "fox", "reuters",
+        "tweet", "tweets", "via", "rt"
+    }
+
     single_topics = get_top_single_word_topics(posts, top_n=single_top_n)
     bigram_topics = get_top_bigram_topics(posts, top_n=bigram_top_n)
 
+    # Filter single words
+    single_topics = [t for t in single_topics if t.lower() not in BLACKLIST and len(t) > 2]
+
+    # Filter bigrams (skip if any word is blacklisted)
+    filtered_bigrams = []
+    for bigram in bigram_topics:
+        words = bigram.split()
+        if all(w.lower() not in BLACKLIST for w in words):
+            filtered_bigrams.append(bigram)
+    bigram_topics = filtered_bigrams
+
+    # Deduplicate
     topics = single_topics + bigram_topics
-
-
-
     seen = set()
     deduped = []
     for t in topics:
